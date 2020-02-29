@@ -3,6 +3,11 @@ use conc_map_bench::{CHashMapTable, ContrieTable, FlurryTable, MutexStdTable, Rw
 
 fn main() {
     tracing_subscriber::fmt::init();
+    println!("Ready heavy preset:");
+    println!("  Read: 94%");
+    println!("  Insert: 2%");
+    println!("  Update: 3%");
+    println!("  Remove: 1%\n");
 
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
