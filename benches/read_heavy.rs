@@ -7,7 +7,8 @@ fn main() {
     println!("  Read: 94%");
     println!("  Insert: 2%");
     println!("  Update: 3%");
-    println!("  Remove: 1%\n");
+    println!("  Remove: 1%");
+    println!("  Upsert: 0%\n");
 
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
