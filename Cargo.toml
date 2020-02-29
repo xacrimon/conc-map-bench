@@ -17,3 +17,7 @@ dashmapv3 = { version = "3.5.1", package = "dashmap" }
 [[bench]]
 name = "read_heavy"
 harness = false
+
+[[bench]]
+name = "insert_heavy"
+harness = false
