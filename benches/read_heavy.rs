@@ -1,5 +1,8 @@
 use bustle::*;
-use conc_map_bench::{CHashMapTable, ContrieTable, FlurryTable, MutexStdTable, RwLockStdTable, DashMapV3Table};
+use conc_map_bench::{
+    CHashMapTable, ContrieTable, DashMapExperimentalTable, DashMapV3Table, FlurryTable,
+    MutexStdTable, RwLockStdTable,
+};
 
 fn main() {
     tracing_subscriber::fmt::init();
@@ -43,6 +46,12 @@ fn main() {
     println!("-- DashMapV3");
     for n in 1..=num_cpus::get() {
         Workload::new(n, Mix::read_heavy()).run::<DashMapV3Table<u64>>();
+    }
+    println!("");
+
+    println!("-- DashMapExperimental");
+    for n in 1..=num_cpus::get() {
+        Workload::new(n, Mix::read_heavy()).run::<DashMapExperimentalTable<u64>>();
     }
     println!("");
 }

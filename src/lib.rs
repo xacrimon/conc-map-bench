@@ -1,11 +1,12 @@
 use bustle::*;
 use chashmap::CHashMap;
 use contrie::ConMap;
+use dashmap_experimental::DashMap as DashMapExperimental;
+use dashmapv3::DashMap as DashMapV3;
 use flurry::HashMap as FlurryMap;
 use fxhash::FxBuildHasher;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, RwLock};
-use dashmapv3::DashMap as DashMapV3;
 
 #[derive(Clone)]
 pub struct MutexStdTable<K>(Arc<Mutex<HashMap<K, u32, FxBuildHasher>>>);
@@ -273,6 +274,52 @@ where
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        self.0.get_mut(key).map(|mut e| *e.value_mut() += 1).is_some()
+        self.0
+            .get_mut(key)
+            .map(|mut e| *e.value_mut() += 1)
+            .is_some()
+    }
+}
+
+#[derive(Clone)]
+pub struct DashMapExperimentalTable<K>(Arc<DashMapExperimental<K, u32, FxBuildHasher>>);
+
+impl<K> Collection for DashMapExperimentalTable<K>
+where
+    K: Send + Sync + From<u64> + Copy + 'static + std::hash::Hash + Eq + std::fmt::Debug,
+{
+    type Handle = Self;
+    fn with_capacity(capacity: usize) -> Self {
+        Self(Arc::new(DashMapExperimental::with_capacity_and_hasher(
+            capacity,
+            FxBuildHasher::default(),
+        )))
+    }
+
+    fn pin(&self) -> Self::Handle {
+        self.clone()
+    }
+}
+
+impl<K> CollectionHandle for DashMapExperimentalTable<K>
+where
+    K: Send + Sync + From<u64> + Copy + 'static + std::hash::Hash + Eq + std::fmt::Debug,
+{
+    type Key = K;
+
+    fn get(&mut self, key: &Self::Key) -> bool {
+        self.0.extract(key, |_, _| ()).is_some()
+    }
+
+    fn insert(&mut self, key: &Self::Key) -> bool {
+        self.0.insert(*key, 0)
+    }
+
+    fn remove(&mut self, key: &Self::Key) -> bool {
+        self.0.remove(key)
+    }
+
+    fn update(&mut self, key: &Self::Key) -> bool {
+        self.0.update(key, |_, v| v + 1)
     }
 }
