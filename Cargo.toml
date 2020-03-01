@@ -13,7 +13,7 @@ chashmap = "2.2.2"
 contrie = "0.1.4"
 flurry = "0.1.0"
 dashmapv3 = { version = "3.5.1", package = "dashmap" }
-dashmap-experimental = { git = "https://github.com/xacrimon/dashmap.git", rev = "523aa5e140ec941e6611534cbe4e42c9f0f35e5b", package = "dashmap" }
+dashmap-experimental = { git = "https://github.com/xacrimon/dashmap.git", rev = "2683c15738943c75544280dba88a786f6a07f388", package = "dashmap" }
 
 [[bench]]
 name = "read_heavy"
