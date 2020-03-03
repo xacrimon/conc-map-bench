@@ -220,16 +220,16 @@ dependencies = [
 [[package]]
 name = "dashmap"
 version = "4.0.0"
-source = "git+https://github.com/xacrimon/dashmap.git?rev=2683c15738943c75544280dba88a786f6a07f388#2683c15738943c75544280dba88a786f6a07f388"
+source = "git+https://github.com/xacrimon/dashmap.git?rev=a826aa7ebfff0f8140760647b479d11e6d33775e#a826aa7ebfff0f8140760647b479d11e6d33775e"
 dependencies = [
  "once_cell",
 ]
 
 [[package]]
 name = "flurry"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58e3e13584b84e0f0c15a07b26551476a734dd7c73d50821b024e013a11ab134"
+checksum = "f8b8ece9d8d27093eb3c77fb14c882a7759a863393bc032302ab612675dd5390"
 dependencies = [
  "ahash",
  "crossbeam-epoch 0.8.2",
