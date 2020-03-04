@@ -4,7 +4,6 @@ conc-map-bench uses the bustle benchmarking harness. This is a port of the well 
 
 Implementations benchmarked
 - Mutex Std HashMap
-- RwLock Std HashMap
 - CHashMap
 - Contrie
 - Flurry

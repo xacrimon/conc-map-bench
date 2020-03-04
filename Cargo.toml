@@ -5,7 +5,7 @@ authors = ["Acrimon <joel.wejdenstal@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-bustle = "=0.3.2"
+bustle = { git = "https://git.nebulanet.cc/Acrimon/bustle-temp-fix.git" }
 tracing-subscriber = "0.2.2"
 num_cpus = "1.12.0"
 fxhash = "0.2.1"
@@ -14,14 +14,7 @@ contrie = "0.1.4"
 flurry = "0.2.0"
 dashmapv3 = { version = "3.5.1", package = "dashmap" }
 
-[[bench]]
-name = "read_heavy"
-harness = false
-
-[[bench]]
-name = "insert_heavy"
-harness = false
-
-[[bench]]
-name = "update_heavy"
-harness = false
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"

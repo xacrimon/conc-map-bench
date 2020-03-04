@@ -5,7 +5,7 @@ use dashmapv3::DashMap as DashMapV3;
 use flurry::HashMap as FlurryMap;
 use fxhash::FxBuildHasher;
 use std::collections::HashMap;
-use std::sync::{Arc, Mutex, RwLock};
+use std::sync::{Arc, Mutex};
 
 #[derive(Clone)]
 pub struct MutexStdTable<K>(Arc<Mutex<HashMap<K, u32, FxBuildHasher>>>);
@@ -47,50 +47,6 @@ where
 
     fn update(&mut self, key: &Self::Key) -> bool {
         let mut map = self.0.lock().unwrap();
-        map.get_mut(key).map(|v| *v += 1).is_some()
-    }
-}
-
-#[derive(Clone)]
-pub struct RwLockStdTable<K>(Arc<RwLock<HashMap<K, u32, FxBuildHasher>>>);
-
-impl<K> Collection for RwLockStdTable<K>
-where
-    K: Send + Sync + From<u64> + Copy + 'static + std::hash::Hash + Eq + std::fmt::Debug,
-{
-    type Handle = Self;
-    fn with_capacity(capacity: usize) -> Self {
-        Self(Arc::new(RwLock::new(HashMap::with_capacity_and_hasher(
-            capacity,
-            FxBuildHasher::default(),
-        ))))
-    }
-
-    fn pin(&self) -> Self::Handle {
-        self.clone()
-    }
-}
-
-impl<K> CollectionHandle for RwLockStdTable<K>
-where
-    K: Send + Sync + From<u64> + Copy + 'static + std::hash::Hash + Eq + std::fmt::Debug,
-{
-    type Key = K;
-
-    fn get(&mut self, key: &Self::Key) -> bool {
-        self.0.read().unwrap().get(key).is_some()
-    }
-
-    fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.write().unwrap().insert(*key, 0).is_some()
-    }
-
-    fn remove(&mut self, key: &Self::Key) -> bool {
-        self.0.write().unwrap().remove(key).is_some()
-    }
-
-    fn update(&mut self, key: &Self::Key) -> bool {
-        let mut map = self.0.write().unwrap();
         map.get_mut(key).map(|v| *v += 1).is_some()
     }
 }

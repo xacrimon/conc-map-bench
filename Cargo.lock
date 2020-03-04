@@ -51,8 +51,7 @@ checksum = "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693"
 [[package]]
 name = "bustle"
 version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c379e3730909ffe4bbf11e959d1add12c3fbcd01e4893bdbf3fc440e03796b33"
+source = "git+https://git.nebulanet.cc/Acrimon/bustle-temp-fix.git#3683847d8947d8a80f636ca86350ab36ed6ee410"
 dependencies = [
  "rand 0.7.3",
  "tracing",
