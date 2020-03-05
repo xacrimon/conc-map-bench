@@ -39,7 +39,7 @@ where
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.lock().unwrap().insert(*key, 0).is_some()
+        self.0.lock().unwrap().insert(*key, 0).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
@@ -80,7 +80,7 @@ where
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, 0).is_some()
+        self.0.insert(*key, 0).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
@@ -125,7 +125,7 @@ where
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, Mutex::new(0)).is_some()
+        self.0.insert(*key, Mutex::new(0)).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
@@ -175,7 +175,7 @@ where
 
     fn insert(&mut self, key: &Self::Key) -> bool {
         let guard = &self.0.guard();
-        self.0.insert(*key, 0, guard).is_some()
+        self.0.insert(*key, 0, guard).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
@@ -222,7 +222,7 @@ where
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, 0).is_some()
+        self.0.insert(*key, 0).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
@@ -268,7 +268,7 @@ where
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, 0)
+        self.0.insert(*key, 0) == false
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {

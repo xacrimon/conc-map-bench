@@ -5,7 +5,7 @@ authors = ["Acrimon <joel.wejdenstal@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-bustle = { git = "https://git.nebulanet.cc/Acrimon/bustle-temp-fix.git" }
+bustle = "0.4.1"
 tracing-subscriber = "0.2.2"
 num_cpus = "1.12.0"
 fxhash = "0.2.1"
