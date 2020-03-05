@@ -10,7 +10,7 @@ use std::time::Duration;
 
 const CAP: u8 = 27;
 const PREFILL: f64 = 0.5;
-const OPS: f64 = 0.5;
+const OPS: f64 = 0.2;
 
 fn pause() {
     sleep(Duration::from_millis(200));
