@@ -8,9 +8,9 @@ use bustle::*;
 use std::thread::sleep;
 use std::time::Duration;
 
-const CAP: u8 = 27;
-const PREFILL: f64 = 0.5;
-const OPS: f64 = 0.2;
+const CAP: u8 = 25;
+const PREFILL: f64 = 0.6;
+const OPS: f64 = 1.5;
 
 fn pause() {
     sleep(Duration::from_millis(200));
