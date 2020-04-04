@@ -6,14 +6,14 @@ edition = "2018"
 
 [dependencies]
 bustle = "0.4.1"
-tracing-subscriber = "0.2.2"
+tracing-subscriber = "0.2.3"
 num_cpus = "1.12.0"
 fxhash = "0.2.1"
 chashmap = "2.2.2"
 contrie = "0.1.4"
-flurry = "0.2.0"
-dashmapv3 = { version = "3.5.1", package = "dashmap" }
-dashmap-experimental = { git = "https://github.com/xacrimon/dashmap.git", rev = "caa890df3dd456cbda306f63e81aec1f7e8340aa", package = "dashmap" }
+flurry = "0.2.1"
+dashmapv3 = { version = "3.9.1", package = "dashmap" }
+dashmap-experimental = { git = "https://github.com/xacrimon/dashmap.git", rev = "736c4fa6872b357217f19853456eedc2e56f6e7b", package = "dashmap", features = ["nightly"] }
 
 [profile.release]
 lto = "fat"
