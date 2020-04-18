@@ -1,7 +1,7 @@
 mod adapters;
 
 use adapters::{
-    CHashMapTable, ContrieTable, DashMapExperimentalTable, DashMapV3Table, FlurryTable,
+    CHashMapTable, ContrieTable, DashMapTable, FlurryTable,
     MutexStdTable,
 };
 use bustle::*;
@@ -38,22 +38,19 @@ fn main() {
     println!("");
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
+        pause();
         read_heavy(n).run::<FlurryTable<u64>>();
     }
     println!("");
     println!("-- Contrie");
     for n in 1..=num_cpus::get() {
+        pause();
         read_heavy(n).run::<ContrieTable<u64>>();
     }
     println!("");
-    println!("-- DashMapV3");
+    println!("-- DashMap");
     for n in 1..=num_cpus::get() {
-        read_heavy(n).run::<DashMapV3Table<u64>>();
-    }
-    println!("");
-    println!("-- DashMapExperimental");
-    for n in 1..=num_cpus::get() {
-        read_heavy(n).run::<DashMapExperimentalTable<u64>>();
         pause();
+        read_heavy(n).run::<DashMapTable<u64>>();
     }
 }

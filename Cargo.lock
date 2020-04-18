@@ -5,9 +5,6 @@ name = "ahash"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0989268a37e128d4d7a8028f1c60099430113fdbc70419010601ce51a228e4fe"
-dependencies = [
- "const-random",
-]
 
 [[package]]
 name = "aho-corasick"
@@ -107,32 +104,11 @@ dependencies = [
  "bustle",
  "chashmap",
  "contrie",
- "dashmap 3.9.1",
- "dashmap 4.0.0",
+ "dashmap",
  "flurry",
  "fxhash",
  "num_cpus",
  "tracing-subscriber",
-]
-
-[[package]]
-name = "const-random"
-version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f1af9ac737b2dd2d577701e59fd09ba34822f6f2ebdb30a7647405d9e55e16a"
-dependencies = [
- "const-random-macro",
- "proc-macro-hack",
-]
-
-[[package]]
-name = "const-random-macro"
-version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25e4c606eb459dd29f7c57b2e0879f2b6f14ee130918c2b78ccb58a9624e6c7a"
-dependencies = [
- "getrandom",
- "proc-macro-hack",
 ]
 
 [[package]]
@@ -199,19 +175,8 @@ dependencies = [
 
 [[package]]
 name = "dashmap"
-version = "3.9.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "beb09e993960365a51676afc743a5c928806386358f36bcb34c5f301b03da348"
-dependencies = [
- "ahash",
- "cfg-if",
- "num_cpus",
-]
-
-[[package]]
-name = "dashmap"
 version = "4.0.0"
-source = "git+https://github.com/xacrimon/dashmap.git?rev=736c4fa6872b357217f19853456eedc2e56f6e7b#736c4fa6872b357217f19853456eedc2e56f6e7b"
+source = "git+https://github.com/xacrimon/dashmap.git?rev=e24a9d3543a711227f353bb3ab9c50f434421028#e24a9d3543a711227f353bb3ab9c50f434421028"
 dependencies = [
  "once_cell",
 ]
@@ -430,12 +395,6 @@ name = "ppv-lite86"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "74490b50b9fbe561ac330df47c08f3f33073d2d00c150f719147d7c54522fa1b"
-
-[[package]]
-name = "proc-macro-hack"
-version = "0.5.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d659fe7c6d27f25e9d80a1a094c223f5246f6a6596453e09d7229bf42750b63"
 
 [[package]]
 name = "rand"

@@ -7,7 +7,7 @@ Implementations benchmarked
 - CHashMap
 - Contrie
 - Flurry
-- DashMap v3
+- DashMap
 
 Benchmark workloads
 - Read heavy
