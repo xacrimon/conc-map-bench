@@ -12,7 +12,7 @@ fxhash = "0.2.1"
 chashmap = "2.2.2"
 contrie = "0.1.4"
 flurry = "0.3.0"
-dashmap = { git = "https://github.com/xacrimon/dashmap.git", rev = "9edac64f3e28461c879a2db1f362bd95637c3975" }
+dashmap = { git = "https://github.com/xacrimon/dashmap.git", rev = "15eef441870705defa4a776daddc6196cdce79a2" }
 crossbeam-epoch = "0.8"
 crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
 
