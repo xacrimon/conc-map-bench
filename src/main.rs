@@ -8,8 +8,19 @@ use bustle::*;
 use std::thread::sleep;
 use std::time::Duration;
 
-fn pause() {
+fn gc_cycle() {
     sleep(Duration::from_millis(200));
+    let mut new_guard = crossbeam_epoch::pin();
+    new_guard.flush();
+    for _ in 0..8 {
+        new_guard.repin();
+    }
+    let mut old_guard = crossbeam_epoch_old::pin();
+    old_guard.flush();
+
+    for _ in 0..8 {
+        old_guard.repin();
+    }
 }
 
 fn read_heavy(n: usize) -> Workload {
@@ -60,26 +71,31 @@ fn main() {
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
         read_heavy(n).run::<MutexStdTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- CHashMap");
     for n in 1..=num_cpus::get() {
         read_heavy(n).run::<CHashMapTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
         read_heavy(n).run::<FlurryTable>();
+        gc_cycle();
     }
     println!("");
     println!("-- Contrie");
     for n in 1..=num_cpus::get() {
         read_heavy(n).run::<ContrieTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- DashMap");
     for n in 1..=num_cpus::get() {
         read_heavy(n).run::<DashMapTable<u64>>();
+        gc_cycle();
     }
     println!("==\n");
 
@@ -87,26 +103,31 @@ fn main() {
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
         rapid_grow(n).run::<MutexStdTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- CHashMap");
     for n in 1..=num_cpus::get() {
         rapid_grow(n).run::<CHashMapTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
         rapid_grow(n).run::<FlurryTable>();
+        gc_cycle();
     }
     println!("");
     println!("-- Contrie");
     for n in 1..=num_cpus::get() {
         rapid_grow(n).run::<ContrieTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- DashMap");
     for n in 1..=num_cpus::get() {
         rapid_grow(n).run::<DashMapTable<u64>>();
+        gc_cycle();
     }
     println!("==\n");
 
@@ -114,26 +135,31 @@ fn main() {
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
         exchange(n).run::<MutexStdTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- CHashMap");
     for n in 1..=num_cpus::get() {
         exchange(n).run::<CHashMapTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
         exchange(n).run::<FlurryTable>();
+        gc_cycle();
     }
     println!("");
     println!("-- Contrie");
     for n in 1..=num_cpus::get() {
         exchange(n).run::<ContrieTable<u64>>();
+        gc_cycle();
     }
     println!("");
     println!("-- DashMap");
     for n in 1..=num_cpus::get() {
         exchange(n).run::<DashMapTable<u64>>();
+        gc_cycle();
     }
     println!("==");
 }

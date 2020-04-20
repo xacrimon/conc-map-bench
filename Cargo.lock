@@ -104,6 +104,8 @@ dependencies = [
  "bustle",
  "chashmap",
  "contrie",
+ "crossbeam-epoch 0.7.2",
+ "crossbeam-epoch 0.8.2",
  "dashmap",
  "flurry",
  "fxhash",
