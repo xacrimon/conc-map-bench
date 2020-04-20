@@ -60,7 +60,7 @@ fn ex_mix() -> Mix {
 fn exchange(n: usize) -> Workload {
     *Workload::new(n, ex_mix())
         .initial_capacity_log2(24)
-        .prefill_fraction(0.0)
+        .prefill_fraction(0.8)
         .operations(1.5)
 }
 
