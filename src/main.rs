@@ -36,6 +36,23 @@ fn rapid_grow(n: usize) -> Workload {
         .operations(1.5)
 }
 
+fn ex_mix() -> Mix {
+    Mix {
+        read: 10,
+        insert: 40,
+        remove: 40,
+        update: 10,
+        upsert: 0,
+    }
+}
+
+fn exchange(n: usize) -> Workload {
+    *Workload::new(n, ex_mix())
+        .initial_capacity_log2(24)
+        .prefill_fraction(0.0)
+        .operations(1.5)
+}
+
 fn main() {
     tracing_subscriber::fmt::init();
 
@@ -52,22 +69,19 @@ fn main() {
     println!("");
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
-        pause();
         read_heavy(n).run::<FlurryTable>();
     }
     println!("");
     println!("-- Contrie");
     for n in 1..=num_cpus::get() {
-        pause();
         read_heavy(n).run::<ContrieTable<u64>>();
     }
     println!("");
     println!("-- DashMap");
     for n in 1..=num_cpus::get() {
-        pause();
         read_heavy(n).run::<DashMapTable<u64>>();
     }
-    println!("==");
+    println!("==\n");
 
     println!("== rapid grow");
     println!("-- MutexStd");
@@ -96,6 +110,33 @@ fn main() {
     for n in 1..=num_cpus::get() {
         pause();
         rapid_grow(n).run::<DashMapTable<u64>>();
+    }
+    println!("==\n");
+
+    println!("== exchange");
+    println!("-- MutexStd");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<MutexStdTable<u64>>();
+    }
+    println!("");
+    println!("-- CHashMap");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<CHashMapTable<u64>>();
+    }
+    println!("");
+    println!("-- Flurry");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<FlurryTable>();
+    }
+    println!("");
+    println!("-- Contrie");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<ContrieTable<u64>>();
+    }
+    println!("");
+    println!("-- DashMap");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<DashMapTable<u64>>();
     }
     println!("==");
 }
