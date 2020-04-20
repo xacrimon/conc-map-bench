@@ -11,6 +11,20 @@ Implementations benchmarked
 
 ## Models
 
+### Exchange
+
+Insert and remove heavy model that replicates a scenario where the map is used to exchange data.
+
+```rust
+Mix {
+    read: 10,
+    insert: 40,
+    remove: 40,
+    update: 10,
+    upsert: 0,
+}
+```
+
 ### Cache
 
 A read heavy model with few inserts, removals and updates. Models caching of data in places such as webservers and disk page caches.
@@ -29,20 +43,6 @@ Self {
 
 An insert heavy model that replicates load in a scenario where the map is used to gather large amounts of data
 under a short burst.
-
-```rust
-Mix {
-    read: 10,
-    insert: 40,
-    remove: 40,
-    update: 10,
-    upsert: 0,
-}
-```
-
-### Exchange
-
-Insert and remove heavy model that replicates a scenario where the map is used to exchange data.
 
 ```rust
 Mix {

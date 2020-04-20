@@ -67,6 +67,38 @@ fn exchange(n: usize) -> Workload {
 fn main() {
     tracing_subscriber::fmt::init();
 
+    println!("== exchange");
+    println!("-- MutexStd");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<MutexStdTable<u64>>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- CHashMap");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<CHashMapTable<u64>>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- Flurry");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<FlurryTable>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- Contrie");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<ContrieTable<u64>>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- DashMap");
+    for n in 1..=num_cpus::get() {
+        exchange(n).run::<DashMapTable<u64>>();
+        gc_cycle();
+    }
+    println!("==\n");
+
     println!("== cache");
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
@@ -127,38 +159,6 @@ fn main() {
     println!("-- DashMap");
     for n in 1..=num_cpus::get() {
         rapid_grow(n).run::<DashMapTable<u64>>();
-        gc_cycle();
-    }
-    println!("==\n");
-
-    println!("== exchange");
-    println!("-- MutexStd");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<MutexStdTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- CHashMap");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<CHashMapTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- Flurry");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<FlurryTable>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- Contrie");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<ContrieTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- DashMap");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<DashMapTable<u64>>();
         gc_cycle();
     }
     println!("==");
