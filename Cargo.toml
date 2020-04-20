@@ -19,3 +19,4 @@ crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
 [profile.release]
 codegen-units = 1
 panic = "abort"
+lto = true
