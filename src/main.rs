@@ -67,7 +67,7 @@ fn exchange(n: usize) -> Workload {
 fn main() {
     tracing_subscriber::fmt::init();
 
-    println!("== read heavy");
+    println!("== cache");
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
         read_heavy(n).run::<MutexStdTable<u64>>();

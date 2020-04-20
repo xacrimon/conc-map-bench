@@ -9,24 +9,47 @@ Implementations benchmarked
 - Flurry
 - DashMap
 
-Benchmark workloads
-- Read heavy
-    - 94% Read
-    - 2% Insert
-    - 3% Update
-    - 1% Remove
-    - 0% Upsert
+## Models
 
-- Insert heavy
-    - 10% Read
-    - 80% Insert
-    - 10% Update
-    - 0% Remove
-    - 0% Upsert
+### Cache
 
-- Update heavy
-    - 35% Read
-    - 5% Insert
-    - 50% Update
-    - 5% Remove
-    - 5% Upsert
+A read heavy model with few inserts, removals and updates. Models caching of data in places such as webservers and disk page caches.
+
+```rust
+Self {
+    read: 94,
+    insert: 2,
+    update: 3,
+    remove: 1,
+    upsert: 0,
+}
+```
+
+### Rapid grow
+
+An insert heavy model that replicates load in a scenario where the map is used to gather large amounts of data
+under a short burst.
+
+```rust
+Mix {
+    read: 10,
+    insert: 40,
+    remove: 40,
+    update: 10,
+    upsert: 0,
+}
+```
+
+### Exchange
+
+Insert and remove heavy model that replicates a scenario where the map is used to exchange data.
+
+```rust
+Mix {
+    read: 10,
+    insert: 40,
+    remove: 40,
+    update: 10,
+    upsert: 0,
+}
+```
