@@ -17,4 +17,3 @@ dashmap = { git = "https://github.com/xacrimon/dashmap.git", rev = "9edac64f3e28
 [profile.release]
 codegen-units = 1
 panic = "abort"
-debug = true
