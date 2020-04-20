@@ -96,19 +96,16 @@ fn main() {
     println!("");
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
-        pause();
         rapid_grow(n).run::<FlurryTable>();
     }
     println!("");
     println!("-- Contrie");
     for n in 1..=num_cpus::get() {
-        pause();
         rapid_grow(n).run::<ContrieTable<u64>>();
     }
     println!("");
     println!("-- DashMap");
     for n in 1..=num_cpus::get() {
-        pause();
         rapid_grow(n).run::<DashMapTable<u64>>();
     }
     println!("==\n");
