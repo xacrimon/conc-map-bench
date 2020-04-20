@@ -14,7 +14,7 @@ fn pause() {
 
 fn read_heavy(n: usize) -> Workload {
     *Workload::new(n, Mix::read_heavy())
-        .initial_capacity_log2(25)
+        .initial_capacity_log2(24)
         .prefill_fraction(0.8)
         .operations(1.5)
 }
