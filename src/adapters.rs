@@ -142,11 +142,9 @@ where
 }
 
 #[derive(Clone)]
-pub struct FlurryTable<K: 'static>(Arc<FlurryMap<K, u32, FxBuildHasher>>);
+pub struct FlurryTable(Arc<FlurryMap<u64, u32, FxBuildHasher>>);
 
-impl<K> Collection for FlurryTable<K>
-where
-    K: Send + Sync + From<u64> + Copy + 'static + std::hash::Hash + Eq + std::fmt::Debug,
+impl Collection for FlurryTable
 {
     type Handle = Self;
     fn with_capacity(capacity: usize) -> Self {
@@ -161,11 +159,8 @@ where
     }
 }
 
-impl<K> CollectionHandle for FlurryTable<K>
-where
-    K: Send + Sync + From<u64> + Copy + 'static + std::hash::Hash + Eq + std::fmt::Debug,
-{
-    type Key = K;
+impl CollectionHandle for FlurryTable {
+    type Key = u64;
 
     fn get(&mut self, key: &Self::Key) -> bool {
         let guard = &self.0.guard();

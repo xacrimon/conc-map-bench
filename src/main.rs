@@ -39,7 +39,7 @@ fn main() {
     println!("-- Flurry");
     for n in 1..=num_cpus::get() {
         pause();
-        read_heavy(n).run::<FlurryTable<u64>>();
+        read_heavy(n).run::<FlurryTable>();
     }
     println!("");
     println!("-- Contrie");
