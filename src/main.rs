@@ -9,7 +9,7 @@ use std::thread::sleep;
 use std::time::Duration;
 
 fn gc_cycle() {
-    sleep(Duration::from_millis(200));
+    sleep(Duration::from_millis(5000));
     let mut new_guard = crossbeam_epoch::pin();
     new_guard.flush();
     for _ in 0..8 {
@@ -64,9 +64,59 @@ fn exchange(n: usize) -> Workload {
         .operations(1.5)
 }
 
-fn main() {
-    tracing_subscriber::fmt::init();
+fn pr_mix() -> Mix {
+    Mix {
+        read: 100,
+        insert: 0,
+        remove: 0,
+        update: 0,
+        upsert: 0,
+    }
+}
 
+
+fn pure_read(n: usize) -> Workload {
+    *Workload::new(n, ex_mix())
+        .initial_capacity_log2(24)
+        .prefill_fraction(0.8)
+        .operations(1.5)
+}
+
+fn pure_read_task() {
+    println!("== pure read");
+    println!("-- MutexStd");
+    for n in 1..=num_cpus::get() {
+        pure_read(n).run::<MutexStdTable<u64>>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- CHashMap");
+    for n in 1..=num_cpus::get() {
+        pure_read(n).run::<CHashMapTable<u64>>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- Flurry");
+    for n in 1..=num_cpus::get() {
+        pure_read(n).run::<FlurryTable>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- Contrie");
+    for n in 1..=num_cpus::get() {
+        pure_read(n).run::<ContrieTable<u64>>();
+        gc_cycle();
+    }
+    println!("");
+    println!("-- DashMap");
+    for n in 1..=num_cpus::get() {
+        pure_read(n).run::<DashMapTable<u64>>();
+        gc_cycle();
+    }
+    println!("==");
+}
+
+fn exchange_task() {
     println!("== exchange");
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
@@ -97,8 +147,10 @@ fn main() {
         exchange(n).run::<DashMapTable<u64>>();
         gc_cycle();
     }
-    println!("==\n");
+    println!("==");
+}
 
+fn cache_task() {
     println!("== cache");
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
@@ -129,8 +181,10 @@ fn main() {
         read_heavy(n).run::<DashMapTable<u64>>();
         gc_cycle();
     }
-    println!("==\n");
+    println!("==");
+}
 
+fn rapid_grow_task() {
     println!("== rapid grow");
     println!("-- MutexStd");
     for n in 1..=num_cpus::get() {
@@ -162,4 +216,13 @@ fn main() {
         gc_cycle();
     }
     println!("==");
+}
+
+fn main() {
+    tracing_subscriber::fmt::init();
+
+    pure_read_task();
+    cache_task();
+    exchange_task();
+    rapid_grow_task();
 }
