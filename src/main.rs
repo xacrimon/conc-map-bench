@@ -9,16 +9,16 @@ use std::thread::sleep;
 use std::time::Duration;
 
 fn gc_cycle() {
-    sleep(Duration::from_millis(5000));
+    sleep(Duration::from_millis(20000));
     let mut new_guard = crossbeam_epoch::pin();
     new_guard.flush();
-    for _ in 0..8 {
+    for _ in 0..32 {
         new_guard.repin();
     }
     let mut old_guard = crossbeam_epoch_old::pin();
     old_guard.flush();
 
-    for _ in 0..8 {
+    for _ in 0..32 {
         old_guard.repin();
     }
 }
