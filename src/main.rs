@@ -76,7 +76,7 @@ fn pr_mix() -> Mix {
 
 
 fn pure_read(n: usize) -> Workload {
-    *Workload::new(n, ex_mix())
+    *Workload::new(n, pr_mix())
         .initial_capacity_log2(24)
         .prefill_fraction(0.8)
         .operations(1.5)
