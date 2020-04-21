@@ -178,7 +178,7 @@ dependencies = [
 [[package]]
 name = "dashmap"
 version = "4.0.0"
-source = "git+https://github.com/xacrimon/dashmap.git?rev=15eef441870705defa4a776daddc6196cdce79a2#15eef441870705defa4a776daddc6196cdce79a2"
+source = "git+https://github.com/xacrimon/dashmap.git?rev=cc9fd11ffb15695c5c9b79223fd875f6df4357db#cc9fd11ffb15695c5c9b79223fd875f6df4357db"
 dependencies = [
  "once_cell",
 ]
