@@ -15,7 +15,6 @@ flurry = "0.3.0"
 dashmap = { git = "https://github.com/xacrimon/dashmap.git", rev = "cc9fd11ffb15695c5c9b79223fd875f6df4357db" }
 crossbeam-epoch = "0.8"
 crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
-mimalloc = "0.1.19"
 
 [profile.release]
 codegen-units = 1
