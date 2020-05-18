@@ -2,7 +2,6 @@ use bustle::*;
 use chashmap::CHashMap;
 use contrie::ConMap;
 use dashmap::DashMap;
-use flurry::HashMap as FlurryMap;
 use fxhash::FxBuildHasher;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -142,45 +141,45 @@ where
 }
 
 #[derive(Clone)]
-pub struct FlurryTable(Arc<FlurryMap<u64, u32, FxBuildHasher>>);
+pub struct FlurryTable(Arc<flurry::HashMap<u64, u32, FxBuildHasher>>);
 
-impl Collection for FlurryTable
-{
-    type Handle = Self;
+pub struct FlurryHandle(flurry::HashMapRef<'static, u64, u32, FxBuildHasher>);
+
+impl Collection for FlurryTable {
+    type Handle = FlurryHandle;
+
     fn with_capacity(capacity: usize) -> Self {
-        Self(Arc::new(FlurryMap::with_capacity_and_hasher(
+        Self(Arc::new(flurry::HashMap::with_capacity_and_hasher(
             capacity,
             FxBuildHasher::default(),
         )))
     }
 
     fn pin(&self) -> Self::Handle {
-        self.clone()
+        unsafe {
+            std::mem::transmute(self.0.pin())
+        }
     }
 }
 
-impl CollectionHandle for FlurryTable {
+impl CollectionHandle for FlurryHandle {
     type Key = u64;
 
     fn get(&mut self, key: &Self::Key) -> bool {
-        let guard = &self.0.guard();
-        self.0.get(key, guard).is_some()
+        self.0.get(key).is_some()
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        let guard = &self.0.guard();
-        self.0.insert(*key, 0, guard).is_none()
+        self.0.insert(*key, 0).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
-        let guard = &self.0.guard();
-        self.0.remove(key, guard).is_some()
+        self.0.remove(key).is_some()
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        let guard = &self.0.guard();
         self.0
-            .compute_if_present(key, |_, v| Some(v + 1), guard)
+            .compute_if_present(key, |_, v| Some(v + 1))
             .is_some()
     }
 }

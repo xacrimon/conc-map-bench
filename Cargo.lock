@@ -62,6 +62,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08c48aae112d48ed9f069b33538ea9e3e90aa263cfa3d1c24309612b1f7472de"
 
 [[package]]
+name = "cc"
+version = "1.0.53"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "404b1fe4f65288577753b17e3b36a04596ee784493ec249bf81c7f2d2acd751c"
+
+[[package]]
 name = "cfg-if"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -98,6 +104,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "cmake"
+version = "0.1.44"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e56268c17a6248366d66d4a47a3381369d068cce8409bb1716ed77ea32163bb"
+dependencies = [
+ "cc",
+]
+
+[[package]]
 name = "conc-map-bench"
 version = "0.1.0"
 dependencies = [
@@ -110,6 +125,7 @@ dependencies = [
  "flurry",
  "fxhash",
  "num_cpus",
+ "snmalloc-rs",
  "tracing-subscriber",
 ]
 
@@ -177,8 +193,9 @@ dependencies = [
 
 [[package]]
 name = "dashmap"
-version = "4.0.0"
-source = "git+https://github.com/xacrimon/dashmap.git?rev=cc9fd11ffb15695c5c9b79223fd875f6df4357db#cc9fd11ffb15695c5c9b79223fd875f6df4357db"
+version = "4.0.0-rc3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c14b72a59fa48ede7dce326a0d59b887dc28a9fe3c8dc7e22c655a6fc7e5e6d0"
 dependencies = [
  "once_cell",
 ]
@@ -572,6 +589,25 @@ name = "smallvec"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c2fb2ec9bcd216a5b0d0ccf31ab17b5ed1d627960edff65bbe95d3ce221cefc"
+
+[[package]]
+name = "snmalloc-rs"
+version = "0.2.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0ea1d790025e9e44cb7eb081f1427df3f88a7067e5266e34df41187333f28f4"
+dependencies = [
+ "snmalloc-sys",
+]
+
+[[package]]
+name = "snmalloc-sys"
+version = "0.2.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a34691794d55f0c416d8e9a8f830fe46afe9d76e125d5cc909eeff199d514b6b"
+dependencies = [
+ "cmake",
+ "libc",
+]
 
 [[package]]
 name = "stable_deref_trait"

@@ -12,9 +12,10 @@ fxhash = "0.2.1"
 chashmap = "2.2.2"
 contrie = "0.1.4"
 flurry = "0.3.0"
-dashmap = { git = "https://github.com/xacrimon/dashmap.git", rev = "cc9fd11ffb15695c5c9b79223fd875f6df4357db" }
+dashmap = "4.0.0-rc3"
 crossbeam-epoch = "0.8"
 crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
+snmalloc-rs = "0.2.13"
 
 [profile.release]
 codegen-units = 1
