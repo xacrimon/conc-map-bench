@@ -9,13 +9,9 @@ bustle = "0.4.1"
 tracing-subscriber = "0.2.4"
 num_cpus = "1.13.0"
 fxhash = "0.2.1"
-chashmap = "2.2.2"
-contrie = "0.1.4"
-flurry = "0.3.0"
-dashmap = "4.0.0-rc3"
-crossbeam-epoch = "0.8"
-crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
-snmalloc-rs = "0.2.13"
+dashmap = "3.11.10"
+shard_lock = { git = "https://github.com/xacrimon/shard_lock.git" }
+parking_lot = "0.10"
 
 [profile.release]
 codegen-units = 1
