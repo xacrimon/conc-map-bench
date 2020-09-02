@@ -6,16 +6,16 @@ edition = "2018"
 
 [dependencies]
 bustle = "0.4.1"
-tracing-subscriber = "0.2.4"
+tracing-subscriber = "0.2.11"
 num_cpus = "1.13.0"
 fxhash = "0.2.1"
 chashmap = "2.2.2"
 contrie = "0.1.4"
-flurry = "0.3.0"
-dashmap = "4.0.0-rc3"
+flurry = "0.3.1"
+dashmap = "4.0.0-rc6"
 crossbeam-epoch = "0.8"
 crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
-snmalloc-rs = "0.2.13"
+snmalloc-rs = "0.2.18"
 
 [profile.release]
 codegen-units = 1
