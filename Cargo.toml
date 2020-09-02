@@ -3,6 +3,7 @@ name = "conc-map-bench"
 version = "0.1.0"
 authors = ["Acrimon <joel.wejdenstal@gmail.com>"]
 edition = "2018"
+publish = false
 
 [dependencies]
 bustle = "0.4.1"
