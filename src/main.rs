@@ -38,7 +38,7 @@ fn read_heavy(n: usize) -> Workload {
     *Workload::new(n, mix)
         .initial_capacity_log2(24)
         .prefill_fraction(0.8)
-        .operations(0.2)
+        .operations(0.01)
 }
 
 fn rg_mix() -> Mix {
@@ -142,19 +142,22 @@ fn cache_task() {
 
     println!("== cache");
     // TODO: add `CHashMap` and so on.
+    //run::<CrossbeamSkipMapTable<u64>, _, _>("CrossbeamSkipMap", read_heavy, range());
     run::<RwLockBTreeMapTable<u64>, _, _>("RwLock<BTreeMap>", read_heavy, range());
-    run::<RwLockStdHashMapTable<u64, RandomState>, _, _>("RwLock<StdHashMap>", read_heavy, range());
+
     run::<RwLockStdHashMapTable<u64, FxBuildHasher>, _, _>(
         "RwLock<FxHashMap>",
         read_heavy,
         range(),
     );
-    run::<FlurryTable<RandomState>, _, _>("FlurryTable", read_heavy, range());
     run::<FlurryTable<FxBuildHasher>, _, _>("FxFlurryTable", read_heavy, range());
-    run::<DashMapTable<u64, RandomState>, _, _>("DashMapTable", read_heavy, range());
     run::<DashMapTable<u64, FxBuildHasher>, _, _>("FxDashMapTable", read_heavy, range());
-    run::<EvmapTable<u64, RandomState>, _, _>("EvmapTable", read_heavy, range());
     run::<EvmapTable<u64, FxBuildHasher>, _, _>("FxEvmapTable", read_heavy, range());
+
+    run::<RwLockStdHashMapTable<u64, RandomState>, _, _>("RwLock<StdHashMap>", read_heavy, range());
+    run::<FlurryTable<RandomState>, _, _>("FlurryTable", read_heavy, range());
+    run::<DashMapTable<u64, RandomState>, _, _>("DashMapTable", read_heavy, range());
+    run::<EvmapTable<u64, RandomState>, _, _>("EvmapTable", read_heavy, range());
 }
 
 /*

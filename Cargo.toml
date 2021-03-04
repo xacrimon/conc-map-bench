@@ -6,7 +6,8 @@ edition = "2018"
 publish = false
 
 [dependencies]
-bustle = { git = "https://github.com/loyd/bustle" }
+#bustle = { git = "https://github.com/loyd/bustle" }
+bustle = { path = "../bustle" }
 tracing-subscriber = "0.2.11"
 num_cpus = "1.13.0"
 fxhash = "0.2.1"
@@ -19,6 +20,7 @@ crossbeam-epoch-old = { package = "crossbeam-epoch", version = "0.7" }
 snmalloc-rs = "0.2.18"
 parking_lot = "0.11.1"
 evmap = "10.0.2"
+crossbeam-skiplist = { git = "https://github.com/crossbeam-rs/crossbeam", path = "crossbeam-skiplist" }
 
 [profile.release]
 codegen-units = 1

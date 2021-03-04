@@ -41,7 +41,6 @@ checksum = "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693"
 [[package]]
 name = "bustle"
 version = "0.4.1"
-source = "git+https://github.com/loyd/bustle#8774ae1c741c7f6eff9766a8027859e571284381"
 dependencies = [
  "rand 0.7.3",
  "tracing",
@@ -118,9 +117,9 @@ dependencies = [
  "bustle",
  "chashmap",
  "contrie",
- "crossbeam",
  "crossbeam-epoch 0.7.2",
  "crossbeam-epoch 0.8.2",
+ "crossbeam-skiplist",
  "dashmap",
  "evmap",
  "flurry",
@@ -141,38 +140,6 @@ dependencies = [
  "bitflags",
  "crossbeam-epoch 0.7.2",
  "smallvec 0.6.14",
-]
-
-[[package]]
-name = "crossbeam"
-version = "0.8.0"
-source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
-dependencies = [
- "cfg-if 1.0.0",
- "crossbeam-channel",
- "crossbeam-deque",
- "crossbeam-epoch 0.9.3",
- "crossbeam-queue",
- "crossbeam-utils 0.8.3",
-]
-
-[[package]]
-name = "crossbeam-channel"
-version = "0.5.0"
-source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
-dependencies = [
- "cfg-if 1.0.0",
- "crossbeam-utils 0.8.3",
-]
-
-[[package]]
-name = "crossbeam-deque"
-version = "0.8.0"
-source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
-dependencies = [
- "cfg-if 1.0.0",
- "crossbeam-epoch 0.9.3",
- "crossbeam-utils 0.8.3",
 ]
 
 [[package]]
@@ -217,12 +184,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "crossbeam-queue"
-version = "0.3.1"
+name = "crossbeam-skiplist"
+version = "0.0.0"
 source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
 dependencies = [
  "cfg-if 1.0.0",
+ "crossbeam-epoch 0.9.3",
  "crossbeam-utils 0.8.3",
+ "scopeguard",
 ]
 
 [[package]]
