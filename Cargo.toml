@@ -22,6 +22,9 @@ parking_lot = "0.11.1"
 evmap = "10.0.2"
 crossbeam-skiplist = { git = "https://github.com/crossbeam-rs/crossbeam", path = "crossbeam-skiplist" }
 structopt = "0.3.21"
+json = "0.12.4"
+csv = "1.1.5"
+serde = { version = "1.0.123", features = ["derive"] }
 
 [profile.release]
 codegen-units = 1
