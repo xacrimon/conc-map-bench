@@ -53,7 +53,7 @@ where
         .threads
         .as_ref()
         .cloned()
-        .unwrap_or_else(|| (1..(num_cpus::get() * 2 / 3) as u32).collect());
+        .unwrap_or_else(|| (1..(num_cpus::get() * 3 / 2) as u32).collect());
 
     for n in &threads {
         handler(name, *n, workloads::create(options, *n).run_silently::<C>());
