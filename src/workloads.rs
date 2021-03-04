@@ -2,7 +2,7 @@ use std::{fmt::Debug, str::FromStr};
 
 use bustle::*;
 
-use super::Options;
+use super::bench::Options;
 
 #[derive(Debug)]
 pub enum WorkloadKind {
