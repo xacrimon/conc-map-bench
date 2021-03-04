@@ -4,9 +4,7 @@ use std::{fmt::Debug, thread::sleep, time::Duration};
 use bustle::*;
 use fxhash::FxBuildHasher;
 
-use self::adapters::{
-    DashMapTable, EvmapTable, FlurryTable, RwLockBTreeMapTable, RwLockStdHashMapTable,
-};
+use self::adapters::*;
 
 mod adapters;
 
