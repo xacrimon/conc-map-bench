@@ -25,6 +25,7 @@ structopt = "0.3.21"
 json = "0.12.4"
 csv = "1.1.5"
 serde = { version = "1.0.123", features = ["derive"] }
+plotters = "0.3.0"
 
 [profile.release]
 codegen-units = 1
