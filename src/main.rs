@@ -3,16 +3,31 @@ use std::{fmt::Debug, thread::sleep, time::Duration};
 
 use bustle::*;
 use fxhash::FxBuildHasher;
+use structopt::StructOpt;
 
 use self::adapters::*;
 
 mod adapters;
+mod workloads;
+
+#[derive(Debug, StructOpt)]
+struct Options {
+    workload: workloads::WorkloadKind,
+    #[structopt(short, long, default_value = "0.1")]
+    operations: f64,
+    #[structopt(long)]
+    threads: Option<Vec<usize>>,
+    #[structopt(long)]
+    use_std_hasher: bool,
+    #[structopt(default_value = "2000")]
+    gc_sleep_ms: u64,
+}
 
 #[global_allocator]
 static ALLOC: snmalloc_rs::SnMalloc = snmalloc_rs::SnMalloc;
 
-fn gc_cycle() {
-    sleep(Duration::from_millis(1000));
+fn gc_cycle(options: &Options) {
+    sleep(Duration::from_millis(options.gc_sleep_ms));
     let mut new_guard = crossbeam_epoch::pin();
     new_guard.flush();
     for _ in 0..32 {
@@ -26,186 +41,50 @@ fn gc_cycle() {
     }
 }
 
-fn read_heavy(n: usize) -> Workload {
-    let mix = Mix {
-        read: 98,
-        insert: 1,
-        remove: 1,
-        update: 0,
-        upsert: 0,
-    };
-
-    *Workload::new(n, mix)
-        .initial_capacity_log2(24)
-        .prefill_fraction(0.8)
-        .operations(0.01)
-}
-
-fn rg_mix() -> Mix {
-    Mix {
-        read: 5,
-        insert: 80,
-        remove: 5,
-        update: 10,
-        upsert: 0,
-    }
-}
-
-fn rapid_grow(n: usize) -> Workload {
-    *Workload::new(n, rg_mix())
-        .initial_capacity_log2(24)
-        .prefill_fraction(0.0)
-        .operations(1.5)
-}
-
-fn ex_mix() -> Mix {
-    Mix {
-        read: 10,
-        insert: 40,
-        remove: 40,
-        update: 10,
-        upsert: 0,
-    }
-}
-
-fn exchange(n: usize) -> Workload {
-    *Workload::new(n, ex_mix())
-        .initial_capacity_log2(24)
-        .prefill_fraction(0.8)
-        .operations(1.5)
-}
-
-/*
-fn exchange_task() {
-    println!("== exchange");
-    println!("-- RwLockStd");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<RwLockStdTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- MutexStd");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<MutexStdTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- CHashMap");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<CHashMapTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- Flurry");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<FlurryTable>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- Contrie");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<ContrieTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- DashMap");
-    for n in 1..=num_cpus::get() {
-        exchange(n).run::<DashMapTable<u64>>();
-        gc_cycle();
-    }
-    println!("==");
-}
-*/
-
-fn run<C, M, R>(name: &str, make_workload: M, range: R)
+fn case<C>(name: &str, options: &Options)
 where
     C: Collection,
     <C::Handle as CollectionHandle>::Key: Send + Debug,
-    M: Fn(usize) -> Workload,
-    R: Iterator<Item = usize>,
 {
     println!("-- {}", name);
-    for n in range {
-        let m = make_workload(n).run_silently::<C>();
+
+    let threads = options
+        .threads
+        .as_ref()
+        .cloned()
+        .unwrap_or_else(|| (1..(num_cpus::get() * 2 / 3)).collect());
+
+    for n in &threads {
+        let m = workloads::create(options, *n).run_silently::<C>();
+
         eprintln!(
             "total_ops={}\tthreads={}\tspent={:.1?}\tlatency={:?}\tthroughput={:.0}op/s",
-            m.total_ops, m.threads, m.spent, m.latency, m.throughput,
+            m.total_ops, n, m.spent, m.latency, m.throughput,
         );
-        gc_cycle();
+        gc_cycle(options);
     }
     println!();
 }
 
-fn cache_task() {
-    //let cpus = num_cpus::get();
-    let range = || 1..=12;
-
-    println!("== cache");
-    // TODO: add `CHashMap` and so on.
-    //run::<CrossbeamSkipMapTable<u64>, _, _>("CrossbeamSkipMap", read_heavy, range());
-    run::<RwLockBTreeMapTable<u64>, _, _>("RwLock<BTreeMap>", read_heavy, range());
-
-    run::<RwLockStdHashMapTable<u64, FxBuildHasher>, _, _>(
-        "RwLock<FxHashMap>",
-        read_heavy,
-        range(),
-    );
-    run::<FlurryTable<FxBuildHasher>, _, _>("FxFlurryTable", read_heavy, range());
-    run::<DashMapTable<u64, FxBuildHasher>, _, _>("FxDashMapTable", read_heavy, range());
-    run::<EvmapTable<u64, FxBuildHasher>, _, _>("FxEvmapTable", read_heavy, range());
-
-    run::<RwLockStdHashMapTable<u64, RandomState>, _, _>("RwLock<StdHashMap>", read_heavy, range());
-    run::<FlurryTable<RandomState>, _, _>("FlurryTable", read_heavy, range());
-    run::<DashMapTable<u64, RandomState>, _, _>("DashMapTable", read_heavy, range());
-    run::<EvmapTable<u64, RandomState>, _, _>("EvmapTable", read_heavy, range());
-}
-
-/*
-fn rapid_grow_task() {
-    println!("== rapid grow");
-    println!("-- RwLockStd");
-    for n in 1..=num_cpus::get() {
-        rapid_grow(n).run::<RwLockStdTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- MutexStd");
-    for n in 1..=num_cpus::get() {
-        rapid_grow(n).run::<MutexStdTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- CHashMap");
-    for n in 1..=num_cpus::get() {
-        rapid_grow(n).run::<CHashMapTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- Flurry");
-    for n in 1..=num_cpus::get() {
-        rapid_grow(n).run::<FlurryTable>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- Contrie");
-    for n in 1..=num_cpus::get() {
-        rapid_grow(n).run::<ContrieTable<u64>>();
-        gc_cycle();
-    }
-    println!("");
-    println!("-- DashMap");
-    for n in 1..=num_cpus::get() {
-        rapid_grow(n).run::<DashMapTable<u64>>();
-        gc_cycle();
-    }
-    println!("==");
-}
-*/
-
 fn main() {
     tracing_subscriber::fmt::init();
 
-    cache_task();
-    //exchange_task();
-    //rapid_grow_task();
+    let options = &Options::from_args();
+    println!("== {:?}", options.workload);
+
+    case::<RwLockBTreeMapTable<u64>>("RwLock<BTreeMap>", options);
+    // TODO: case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options);
+
+    if options.use_std_hasher {
+        case::<RwLockStdHashMapTable<u64, RandomState>>("RwLock<StdHashMap>", options);
+        case::<DashMapTable<u64, RandomState>>("DashMap", options);
+        case::<FlurryTable<RandomState>>("Flurry", options);
+        case::<EvmapTable<u64, RandomState>>("Evmap", options);
+        case::<CHashMapTable<u64>>("CHashMap", options);
+    } else {
+        case::<RwLockStdHashMapTable<u64, FxBuildHasher>>("RwLock<FxHashMap>", options);
+        case::<DashMapTable<u64, FxBuildHasher>>("FxDashMap", options);
+        case::<FlurryTable<FxBuildHasher>>("FxFlurry", options);
+        case::<EvmapTable<u64, FxBuildHasher>>("FxEvmap", options);
+    }
 }
