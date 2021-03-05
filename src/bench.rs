@@ -17,7 +17,7 @@ pub struct Options {
     pub threads: Option<Vec<u32>>,
     #[structopt(long)]
     pub use_std_hasher: bool,
-    #[structopt(default_value = "2000")]
+    #[structopt(long, default_value = "2000")]
     pub gc_sleep_ms: u64,
     #[structopt(long)]
     pub csv: bool,
