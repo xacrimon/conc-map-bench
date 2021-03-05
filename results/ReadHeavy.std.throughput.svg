@@ -150,35 +150,40 @@ Throughput
 </text>
 <polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="560,72 565,72 "/>
 <polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,386 101,377 123,382 145,389 167,376 189,385 210,384 232,381 254,380 276,381 298,382 320,384 341,376 363,384 385,383 407,383 429,383 450,383 472,382 494,377 516,382 538,376 560,383 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,389 101,357 123,320 145,292 167,262 189,229 210,199 232,194 254,178 276,163 298,136 320,101 341,71 363,79 385,71 407,37 429,107 450,106 472,115 494,126 516,98 538,96 560,85 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,399 101,373 123,352 145,325 167,310 189,295 210,289 232,299 254,310 276,354 298,342 320,343 341,337 363,345 385,340 407,328 429,332 450,329 472,332 494,332 516,329 538,331 560,332 "/>
-<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,393 101,361 123,331 145,299 167,273 189,253 210,228 232,214 254,198 276,174 298,160 320,143 341,135 363,110 385,99 407,86 429,143 450,136 472,148 494,140 516,127 538,130 560,122 "/>
-<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,417 101,408 123,399 145,394 "/>
-<polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="80,386 101,377 123,370 145,376 167,370 189,376 210,374 232,375 254,376 276,373 298,374 320,378 341,382 363,384 385,384 407,385 429,387 450,388 472,389 494,389 516,391 538,391 560,394 "/>
-<rect x="85" y="42" width="166" height="113" opacity="0.8" fill="#FFFFFF" stroke="none"/>
-<rect x="85" y="42" width="166" height="113" opacity="1" fill="none" stroke="#000000"/>
+<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,425 101,422 123,419 145,416 167,412 189,410 210,407 232,405 254,403 276,401 298,400 320,397 341,395 363,393 385,392 407,390 429,393 450,394 472,394 494,394 516,394 538,393 560,393 "/>
+<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,389 101,357 123,320 145,292 167,262 189,229 210,199 232,194 254,178 276,163 298,136 320,101 341,71 363,79 385,71 407,37 429,107 450,106 472,115 494,126 516,98 538,96 560,85 "/>
+<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,399 101,373 123,352 145,325 167,310 189,295 210,289 232,299 254,310 276,354 298,342 320,343 341,337 363,345 385,340 407,328 429,332 450,329 472,332 494,332 516,329 538,331 560,332 "/>
+<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,393 101,361 123,331 145,299 167,273 189,253 210,228 232,214 254,198 276,174 298,160 320,143 341,135 363,110 385,99 407,86 429,143 450,136 472,148 494,140 516,127 538,130 560,122 "/>
+<polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="80,417 101,408 123,399 145,394 "/>
+<polyline fill="none" opacity="1" stroke="#FFFF00" stroke-width="1" points="80,386 101,377 123,370 145,376 167,370 189,376 210,374 232,375 254,376 276,373 298,374 320,378 341,382 363,384 385,384 407,385 429,387 450,388 472,389 494,389 516,391 538,391 560,394 "/>
+<rect x="85" y="42" width="166" height="130" opacity="0.8" fill="#FFFFFF" stroke="none"/>
+<rect x="85" y="42" width="166" height="130" opacity="1" fill="none" stroke="#000000"/>
 <text x="125" y="52" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 CHashMap
 </text>
 <text x="125" y="68" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-DashMap
+CrossbeamSkipMap
 </text>
 <text x="125" y="85" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-Evmap
+DashMap
 </text>
 <text x="125" y="101" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-Flurry
+Evmap
 </text>
 <text x="125" y="117" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-RwLock&lt;BTreeMap&gt;
+Flurry
 </text>
 <text x="125" y="133" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
+RwLock&lt;BTreeMap&gt;
+</text>
+<text x="125" y="150" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 RwLock&lt;StdHashMap&gt;
 </text>
 <polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="95,58 115,58 "/>
 <polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="95,74 115,74 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="95,90 115,90 "/>
-<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="95,107 115,107 "/>
+<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="95,91 115,91 "/>
+<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="95,106 115,106 "/>
 <polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="95,123 115,123 "/>
 <polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="95,139 115,139 "/>
+<polyline fill="none" opacity="1" stroke="#FFFF00" stroke-width="1" points="95,156 115,156 "/>
 </svg>

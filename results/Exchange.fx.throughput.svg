@@ -157,31 +157,36 @@ Throughput
 40 Mop/s
 </text>
 <polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="560,37 565,37 "/>
-<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,351 101,316 123,308 145,244 167,177 189,139 210,237 232,167 254,216 276,134 298,187 320,99 341,76 363,37 385,58 407,154 429,154 450,81 472,167 494,168 516,68 538,154 560,37 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,406 101,410 123,419 145,422 167,423 189,424 210,424 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,394 101,387 123,380 145,353 167,347 189,344 210,340 232,330 254,323 276,323 298,308 320,311 341,317 363,286 385,317 407,305 429,320 450,323 472,311 494,307 516,314 538,315 560,307 "/>
-<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,409 101,415 123,420 145,422 167,423 189,424 210,424 232,424 254,424 276,425 "/>
-<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,324 101,354 123,372 145,387 167,403 189,402 210,408 "/>
-<rect x="85" y="42" width="159" height="97" opacity="0.8" fill="#FFFFFF" stroke="none"/>
-<rect x="85" y="42" width="159" height="97" opacity="1" fill="none" stroke="#000000"/>
+<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,423 101,417 123,412 145,408 167,403 189,399 210,396 232,392 254,389 276,387 298,383 320,380 341,377 363,375 385,371 407,370 429,373 450,379 472,374 494,375 516,376 538,374 560,373 "/>
+<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,351 101,316 123,308 145,244 167,177 189,139 210,237 232,167 254,216 276,134 298,187 320,99 341,76 363,37 385,58 407,154 429,154 450,81 472,167 494,168 516,68 538,154 560,37 "/>
+<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,406 101,410 123,419 145,422 167,423 189,424 210,424 "/>
+<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,394 101,387 123,380 145,353 167,347 189,344 210,340 232,330 254,323 276,323 298,308 320,311 341,317 363,286 385,317 407,305 429,320 450,323 472,311 494,307 516,314 538,315 560,307 "/>
+<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,409 101,415 123,420 145,422 167,423 189,424 210,424 232,424 254,424 276,425 "/>
+<polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="80,324 101,354 123,372 145,387 167,403 189,402 210,408 "/>
+<rect x="85" y="42" width="159" height="113" opacity="0.8" fill="#FFFFFF" stroke="none"/>
+<rect x="85" y="42" width="159" height="113" opacity="1" fill="none" stroke="#000000"/>
 <text x="125" y="52" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-FxDashMap
+CrossbeamSkipMap
 </text>
 <text x="125" y="68" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-FxEvmap
+FxDashMap
 </text>
 <text x="125" y="85" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-FxFlurry
+FxEvmap
 </text>
 <text x="125" y="101" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-RwLock&lt;BTreeMap&gt;
+FxFlurry
 </text>
 <text x="125" y="117" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
+RwLock&lt;BTreeMap&gt;
+</text>
+<text x="125" y="133" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 RwLock&lt;FxHashMap&gt;
 </text>
 <polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="95,58 115,58 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="95,73 115,73 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="95,91 115,91 "/>
+<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="95,74 115,74 "/>
+<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="95,90 115,90 "/>
 <polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="95,107 115,107 "/>
 <polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="95,123 115,123 "/>
+<polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="95,139 115,139 "/>
 </svg>

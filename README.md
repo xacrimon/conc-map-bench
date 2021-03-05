@@ -17,7 +17,7 @@ Implementations benchmarked
 ```
 ├── chashmap v2.2.2
 ├── contrie v0.1.4
-├── crossbeam-skiplist v0.0.0 (https://github.com/crossbeam-rs/crossbeam#2970aae9)
+├── crossbeam-skiplist v0.0.0 (https://github.com/crossbeam-rs/crossbeam#e1d64600)
 ├── dashmap v4.0.0-rc6
 ├── evmap v10.0.2
 ├── flurry v0.3.1
