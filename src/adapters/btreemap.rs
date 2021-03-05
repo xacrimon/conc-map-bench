@@ -4,8 +4,10 @@ use std::sync::Arc;
 use bustle::*;
 use parking_lot::RwLock;
 
+use super::Value;
+
 #[derive(Clone)]
-pub struct RwLockBTreeMapTable<K>(Arc<RwLock<BTreeMap<K, u32>>>);
+pub struct RwLockBTreeMapTable<K>(Arc<RwLock<BTreeMap<K, Value>>>);
 
 impl<K> Collection for RwLockBTreeMapTable<K>
 where

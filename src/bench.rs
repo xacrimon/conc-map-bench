@@ -9,6 +9,7 @@ use crate::{adapters::*, record::Record, workloads};
 
 #[derive(Debug, StructOpt)]
 pub struct Options {
+    #[structopt(short, long)]
     pub workload: workloads::WorkloadKind,
     #[structopt(short, long, default_value = "1")]
     pub operations: f64,
@@ -69,13 +70,13 @@ fn run(options: &Options, h: &mut Handler) {
     if options.use_std_hasher {
         case::<RwLockStdHashMapTable<u64, RandomState>>("RwLock<StdHashMap>", options, h);
         case::<DashMapTable<u64, RandomState>>("DashMap", options, h);
-        case::<FlurryTable<RandomState>>("Flurry", options, h);
+        case::<FlurryTable<u64, RandomState>>("Flurry", options, h);
         case::<EvmapTable<u64, RandomState>>("Evmap", options, h);
         case::<CHashMapTable<u64>>("CHashMap", options, h);
     } else {
         case::<RwLockStdHashMapTable<u64, FxBuildHasher>>("RwLock<FxHashMap>", options, h);
         case::<DashMapTable<u64, FxBuildHasher>>("FxDashMap", options, h);
-        case::<FlurryTable<FxBuildHasher>>("FxFlurry", options, h);
+        case::<FlurryTable<u64, FxBuildHasher>>("FxFlurry", options, h);
         case::<EvmapTable<u64, FxBuildHasher>>("FxEvmap", options, h);
     }
 }

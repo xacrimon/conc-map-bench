@@ -1,16 +1,18 @@
 use std::hash::{BuildHasher, Hash};
-use std::sync::Arc;
+use std::{fmt::Debug, sync::Arc};
 
 use bustle::*;
 use contrie::ConMap;
 use parking_lot::Mutex;
 
+use super::Value;
+
 #[derive(Clone)]
-pub struct ContrieTable<K: Eq + Hash + 'static, H>(Arc<ConMap<K, Mutex<u32>, H>>);
+pub struct ContrieTable<K: Eq + Hash + 'static, H>(Arc<ConMap<K, Mutex<Value>, H>>);
 
 impl<K, H> Collection for ContrieTable<K, H>
 where
-    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + std::fmt::Debug,
+    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + Debug,
     H: BuildHasher + Default + Send + Sync + 'static + Clone,
 {
     type Handle = Self;
@@ -26,7 +28,7 @@ where
 
 impl<K, H> CollectionHandle for ContrieTable<K, H>
 where
-    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + std::fmt::Debug,
+    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + Debug,
     H: BuildHasher + Default + Send + Sync + 'static + Clone,
 {
     type Key = K;

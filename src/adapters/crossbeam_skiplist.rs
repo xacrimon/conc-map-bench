@@ -3,6 +3,8 @@ use std::marker::PhantomData;
 use bustle::*;
 use crossbeam_skiplist::SkipMap;
 
+use super::Value;
+
 pub struct CrossbeamSkipMapTable<K>(PhantomData<K>);
 
 impl<K> Collection for CrossbeamSkipMapTable<K>
@@ -20,7 +22,7 @@ where
     }
 }
 
-pub struct CrossbeamSkipMapHandle<K>(SkipMap<K, u32>);
+pub struct CrossbeamSkipMapHandle<K>(SkipMap<K, Value>);
 
 impl<K> CollectionHandle for CrossbeamSkipMapHandle<K>
 where

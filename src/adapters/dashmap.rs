@@ -4,8 +4,10 @@ use std::sync::Arc;
 use bustle::*;
 use dashmap::DashMap;
 
+use super::Value;
+
 #[derive(Clone)]
-pub struct DashMapTable<K, H>(Arc<DashMap<K, u32, H>>);
+pub struct DashMapTable<K, H>(Arc<DashMap<K, Value, H>>);
 
 impl<K, H> Collection for DashMapTable<K, H>
 where

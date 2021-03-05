@@ -5,8 +5,10 @@ use std::sync::Arc;
 use bustle::*;
 use parking_lot::RwLock;
 
+use super::Value;
+
 #[derive(Clone)]
-pub struct RwLockStdHashMapTable<K, H>(Arc<RwLock<HashMap<K, u32, H>>>);
+pub struct RwLockStdHashMapTable<K, H>(Arc<RwLock<HashMap<K, Value, H>>>);
 
 impl<K, H> Collection for RwLockStdHashMapTable<K, H>
 where

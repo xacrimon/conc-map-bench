@@ -1,15 +1,16 @@
-use std::hash::Hash;
-use std::sync::Arc;
+use std::{fmt::Debug, hash::Hash, sync::Arc};
 
 use bustle::*;
 use chashmap::CHashMap;
 
+use super::Value;
+
 #[derive(Clone)]
-pub struct CHashMapTable<K>(Arc<CHashMap<K, u32>>);
+pub struct CHashMapTable<K>(Arc<CHashMap<K, Value>>);
 
 impl<K> Collection for CHashMapTable<K>
 where
-    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + std::fmt::Debug,
+    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + Debug,
 {
     type Handle = Self;
 
@@ -24,7 +25,7 @@ where
 
 impl<K> CollectionHandle for CHashMapTable<K>
 where
-    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + std::fmt::Debug,
+    K: Send + Sync + From<u64> + Copy + 'static + Hash + Eq + Debug,
 {
     type Key = K;
 

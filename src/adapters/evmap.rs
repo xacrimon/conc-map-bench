@@ -4,10 +4,12 @@ use std::sync::Arc;
 use bustle::*;
 use parking_lot::Mutex;
 
+use super::Value;
+
 #[derive(Clone)]
 pub struct EvmapTable<K: Hash + Eq + Clone, H: BuildHasher + Clone> {
-    rd: Arc<Mutex<evmap::ReadHandle<K, u32, (), H>>>,
-    wr: Arc<Mutex<evmap::WriteHandle<K, u32, (), H>>>,
+    rd: Arc<Mutex<evmap::ReadHandle<K, Value, (), H>>>,
+    wr: Arc<Mutex<evmap::WriteHandle<K, Value, (), H>>>,
 }
 
 impl<K, H> Collection for EvmapTable<K, H>

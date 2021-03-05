@@ -12,3 +12,5 @@ mod dashmap;
 mod evmap;
 mod flurry;
 mod std;
+
+type Value = u32;

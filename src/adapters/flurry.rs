@@ -1,18 +1,21 @@
-use std::hash::BuildHasher;
+use std::hash::{BuildHasher, Hash};
 use std::sync::Arc;
 
 use bustle::*;
 
+use super::Value;
+
 #[derive(Clone)]
-pub struct FlurryTable<H>(Arc<flurry::HashMap<u64, u32, H>>);
+pub struct FlurryTable<K, H>(Arc<flurry::HashMap<K, Value, H>>);
 
-pub struct FlurryHandle<H: 'static>(flurry::HashMapRef<'static, u64, u32, H>);
+pub struct FlurryHandle<K: 'static, H: 'static>(flurry::HashMapRef<'static, K, Value, H>);
 
-impl<H> Collection for FlurryTable<H>
+impl<K, H> Collection for FlurryTable<K, H>
 where
+    K: Send + Sync + From<u64> + Copy + 'static + Hash + Ord,
     H: BuildHasher + Default + Send + Sync + 'static + Clone,
 {
-    type Handle = FlurryHandle<H>;
+    type Handle = FlurryHandle<K, H>;
 
     fn with_capacity(capacity: usize) -> Self {
         Self(Arc::new(flurry::HashMap::with_capacity_and_hasher(
@@ -26,11 +29,12 @@ where
     }
 }
 
-impl<H> CollectionHandle for FlurryHandle<H>
+impl<K, H> CollectionHandle for FlurryHandle<K, H>
 where
+    K: Send + Sync + From<u64> + Copy + 'static + Hash + Ord,
     H: BuildHasher + Default + Send + Sync + 'static + Clone,
 {
-    type Key = u64;
+    type Key = K;
 
     fn get(&mut self, key: &Self::Key) -> bool {
         self.0.get(key).is_some()
