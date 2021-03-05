@@ -13,9 +13,9 @@ pub struct Options {
     // <dir>/<name>.latency.svg
     dir: PathBuf,
     name: String,
-    #[structopt(short, long, default_value = "640")]
+    #[structopt(short, long, default_value = "560")]
     width: u32,
-    #[structopt(short, long, default_value = "480")]
+    #[structopt(short, long, default_value = "400")]
     height: u32,
 }
 
@@ -133,6 +133,7 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
         .disable_y_mesh()
         .x_label_formatter(&|v| format!("{}", v))
         .y_label_formatter(&|v| format!("{:.0} ns", v))
+        .y_labels(20)
         .y_desc("Latency")
         .x_desc("Threads")
         .draw()?;
@@ -153,7 +154,7 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
 
     chart
         .configure_series_labels()
-        .position(SeriesLabelPosition::UpperLeft)
+        .position(SeriesLabelPosition::UpperMiddle)
         .label_font((FONT, 15))
         .background_style(&WHITE.mix(0.8))
         .border_style(&BLACK)
