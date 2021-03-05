@@ -19,11 +19,12 @@ where
     }
 
     fn pin(&self) -> Self::Handle {
-        CrossbeamSkipMapHandle(SkipMap::new())
+        CrossbeamSkipMapHandle(Mutex::new(SkipMap::new()))
     }
 }
 
-pub struct CrossbeamSkipMapHandle<K>(SkipMap<K, Mutex<Value>>);
+// FIXME: we use `Mutex` to help us estimate where is a bug (skiplist? burst? adapter?)
+pub struct CrossbeamSkipMapHandle<K>(Mutex<SkipMap<K, Mutex<Value>>>);
 
 impl<K> CollectionHandle for CrossbeamSkipMapHandle<K>
 where
@@ -32,21 +33,23 @@ where
     type Key = K;
 
     fn get(&mut self, key: &Self::Key) -> bool {
-        self.0.get(key).is_some()
+        self.0.lock().get(key).is_some()
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        let prev = self.0.get(key).is_none();
-        self.0.insert(*key, Mutex::new(0));
+        let map = self.0.lock();
+        let prev = map.get(key).is_none();
+        map.insert(*key, Mutex::new(0));
         prev
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
-        self.0.remove(key).is_some()
+        self.0.lock().remove(key).is_some()
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
         self.0
+            .lock()
             .get(key)
             .map(|e| {
                 *e.value().lock() += 1;
