@@ -77,7 +77,7 @@ See the `results/` directory.
 :-------------------------:|:-------------------------:
 ![](results/RapidGrow.fx.throughput.svg) | ![](results/RapidGrow.fx.latency.svg)
 
-### Ready Heavy (std hasher)
+### Read Heavy (std hasher)
 | | |
 :-------------------------:|:-------------------------:
 ![](results/ReadHeavy.std.throughput.svg) | ![](results/ReadHeavy.std.latency.svg)
