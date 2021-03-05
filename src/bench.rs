@@ -25,6 +25,8 @@ pub struct Options {
     pub latency_limit_ns: u64,
     #[structopt(long)]
     pub csv: bool,
+    #[structopt(long)]
+    pub csv_no_headers: bool,
 }
 
 #[global_allocator]
@@ -105,7 +107,9 @@ pub fn bench(options: &Options) {
     println!("== {:?}", options.workload);
 
     let mut handler = if options.csv {
-        let mut wr = csv::Writer::from_writer(io::stderr());
+        let mut wr = csv::WriterBuilder::new()
+            .has_headers(!options.csv_no_headers)
+            .from_writer(io::stderr());
 
         Box::new(move |name: &str, n, m: &Measurement| {
             wr.serialize(Record {
