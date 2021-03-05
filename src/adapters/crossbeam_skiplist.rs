@@ -2,6 +2,7 @@ use std::marker::PhantomData;
 
 use bustle::*;
 use crossbeam_skiplist::SkipMap;
+use parking_lot::Mutex;
 
 use super::Value;
 
@@ -22,7 +23,7 @@ where
     }
 }
 
-pub struct CrossbeamSkipMapHandle<K>(SkipMap<K, Value>);
+pub struct CrossbeamSkipMapHandle<K>(SkipMap<K, Mutex<Value>>);
 
 impl<K> CollectionHandle for CrossbeamSkipMapHandle<K>
 where
@@ -36,7 +37,7 @@ where
 
     fn insert(&mut self, key: &Self::Key) -> bool {
         let prev = self.0.get(key).is_none();
-        self.0.insert(*key, 0);
+        self.0.insert(*key, Mutex::new(0));
         prev
     }
 
@@ -45,12 +46,11 @@ where
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        let entry = match self.0.get(key) {
-            Some(entry) => entry,
-            None => return false,
-        };
-
-        self.0.insert(*key, entry.value() + 1);
-        true
+        self.0
+            .get(key)
+            .map(|e| {
+                *e.value().lock() += 1;
+            })
+            .is_some()
     }
 }

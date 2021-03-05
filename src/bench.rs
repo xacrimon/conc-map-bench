@@ -64,8 +64,8 @@ where
 }
 
 fn run(options: &Options, h: &mut Handler) {
-    case::<RwLockBTreeMapTable<u64>>("RwLock<BTreeMap>", options, h);
     // TODO: case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options, h);
+    case::<RwLockBTreeMapTable<u64>>("RwLock<BTreeMap>", options, h);
 
     if options.use_std_hasher {
         case::<RwLockStdHashMapTable<u64, RandomState>>("RwLock<StdHashMap>", options, h);
