@@ -13,10 +13,12 @@ pub struct Options {
     // <dir>/<name>.latency.svg
     dir: PathBuf,
     name: String,
-    #[structopt(short, long, default_value = "560")]
+    #[structopt(short, long, default_value = "640")]
     width: u32,
-    #[structopt(short, long, default_value = "400")]
+    #[structopt(short, long, default_value = "480")]
     height: u32,
+    #[structopt(long, default_value = "2500")]
+    latency_limit_ns: u64,
 }
 
 pub fn plot(options: &Options) {
@@ -97,7 +99,7 @@ fn plot_throughput(options: &Options, groups: &Groups) -> Result<(), Box<dyn Err
     chart
         .configure_series_labels()
         .position(SeriesLabelPosition::UpperLeft)
-        .label_font((FONT, 15))
+        .label_font((FONT, 13))
         .background_style(&WHITE.mix(0.8))
         .border_style(&BLACK)
         .draw()?;
@@ -120,13 +122,15 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
             (res.0.max(cur.0), res.1.max(cur.1))
         });
 
+    let y_max = options.latency_limit_ns.min(y_max.as_nanos() as u64);
+
     let mut chart = ChartBuilder::on(&root)
         .margin(10)
         .caption(&format!("{}: Latency", options.name), (FONT, 20))
         .set_label_area_size(LabelAreaPosition::Left, 70)
         .set_label_area_size(LabelAreaPosition::Right, 70)
         .set_label_area_size(LabelAreaPosition::Bottom, 40)
-        .build_cartesian_2d(1..x_max, 0..y_max.as_nanos())?;
+        .build_cartesian_2d(1..x_max, 0..y_max)?;
 
     chart
         .configure_mesh()
@@ -145,7 +149,7 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
             .draw_series(LineSeries::new(
                 records
                     .iter()
-                    .map(|record| (record.threads, record.latency.as_nanos())),
+                    .map(|record| (record.threads, record.latency.as_nanos() as u64)),
                 color,
             ))?
             .label(&records[0].name)
@@ -154,8 +158,8 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
 
     chart
         .configure_series_labels()
-        .position(SeriesLabelPosition::UpperMiddle)
-        .label_font((FONT, 15))
+        .position(SeriesLabelPosition::UpperLeft)
+        .label_font((FONT, 13))
         .background_style(&WHITE.mix(0.8))
         .border_style(&BLACK)
         .draw()?;

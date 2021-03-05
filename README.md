@@ -61,23 +61,35 @@ CPU: AMD Ryzen 7 4800HS
 See the `results/` directory.
 
 ### Ready Heavy (fx hasher)
-![](results/ReadHeavy.fx.throughput.svg) ![](results/ReadHeavy.fx.latency.svg)
+| | |
+:-------------------------:|:-------------------------:
+![](results/ReadHeavy.fx.throughput.svg) | ![](results/ReadHeavy.fx.latency.svg)
 
 ### Exchange (fx hasher)
 **NOTE**: the `flurry` case fails because of the OOM killer.
 
-![](results/Exchange.fx.throughput.svg) ![](results/Exchange.fx.latency.svg)
+| | |
+:-------------------------:|:-------------------------:
+![](results/Exchange.fx.throughput.svg) | ![](results/Exchange.fx.latency.svg)
 
 ### Rapid Grow (fx hasher)
-![](results/RapidGrow.fx.throughput.svg) ![](results/RapidGrow.fx.latency.svg)
+| | |
+:-------------------------:|:-------------------------:
+![](results/RapidGrow.fx.throughput.svg) | ![](results/RapidGrow.fx.latency.svg)
 
 ### Ready Heavy (std hasher)
-![](results/ReadHeavy.std.throughput.svg) ![](results/ReadHeavy.std.latency.svg)
+| | |
+:-------------------------:|:-------------------------:
+![](results/ReadHeavy.std.throughput.svg) | ![](results/ReadHeavy.std.latency.svg)
 
 ### Exchange (std hasher)
 **NOTE**: the `flurry` case fails because of the OOM killer.
 
-![](results/Exchange.std.throughput.svg) ![](results/Exchange.std.latency.svg)
+| | |
+:-------------------------:|:-------------------------:
+![](results/Exchange.std.throughput.svg) | ![](results/Exchange.std.latency.svg)
 
 ### Rapid Grow (std hasher)
-![](results/RapidGrow.std.throughput.svg) ![](results/RapidGrow.std.latency.svg)
+| | |
+:-------------------------:|:-------------------------:
+![](results/RapidGrow.std.throughput.svg) | ![](results/RapidGrow.std.latency.svg)
