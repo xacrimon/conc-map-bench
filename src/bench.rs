@@ -92,7 +92,7 @@ where
 }
 
 fn run(options: &Options, h: &mut Handler) {
-    // TODO: case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options, h);
+    case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options, h);
     case::<RwLockBTreeMapTable<u64>>("RwLock<BTreeMap>", options, h);
 
     if options.use_std_hasher {

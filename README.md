@@ -9,7 +9,7 @@ Implementations benchmarked
 - Flurry
 - DashMap
 - Evmap
-- Crossbeam Skiplist (currently fails)
+- Crossbeam Skiplist
 
 ```sh
 > cargo tree | rg 'dashmap|chashmap|contrie|flurry|evmap|crossbeam-skiplist'
