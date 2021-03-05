@@ -21,6 +21,8 @@ pub struct Options {
     pub gc_sleep_ms: u64,
     #[structopt(long)]
     pub skip: Option<Vec<String>>, // TODO: use just `Vec<String>`.
+    #[structopt(long, default_value = "5000")]
+    pub latency_limit_ns: u64,
     #[structopt(long)]
     pub csv: bool,
 }
@@ -43,7 +45,7 @@ fn gc_cycle(options: &Options) {
     }
 }
 
-type Handler = Box<dyn FnMut(&str, u32, Measurement)>;
+type Handler = Box<dyn FnMut(&str, u32, &Measurement)>;
 
 fn case<C>(name: &str, options: &Options, handler: &mut Handler)
 where
@@ -69,7 +71,13 @@ where
         .unwrap_or_else(|| (1..(num_cpus::get() * 3 / 2) as u32).collect());
 
     for n in &threads {
-        handler(name, *n, workloads::create(options, *n).run_silently::<C>());
+        let m = workloads::create(options, *n).run_silently::<C>();
+        handler(name, *n, &m);
+
+        if m.latency.as_nanos() > options.latency_limit_ns.into() {
+            println!("too long, skipped");
+            break;
+        }
         gc_cycle(options);
     }
     println!();
@@ -99,7 +107,7 @@ pub fn bench(options: &Options) {
     let mut handler = if options.csv {
         let mut wr = csv::Writer::from_writer(io::stderr());
 
-        Box::new(move |name: &str, n, m: Measurement| {
+        Box::new(move |name: &str, n, m: &Measurement| {
             wr.serialize(Record {
                 name: name.into(),
                 total_ops: m.total_ops,
@@ -112,7 +120,7 @@ pub fn bench(options: &Options) {
             wr.flush().expect("cannot flush");
         }) as Handler
     } else {
-        Box::new(|_: &str, n, m: Measurement| {
+        Box::new(|_: &str, n, m: &Measurement| {
             eprintln!(
                 "total_ops={}\tthreads={}\tspent={:.1?}\tlatency={:?}\tthroughput={:.0}op/s",
                 m.total_ops, n, m.spent, m.latency, m.throughput,
