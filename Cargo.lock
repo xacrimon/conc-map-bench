@@ -344,7 +344,7 @@ dependencies = [
 [[package]]
 name = "crossbeam-epoch"
 version = "0.9.3"
-source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
+source = "git+https://github.com/crossbeam-rs/crossbeam#e1d646005d71f41b2eef7170683aad4285d47403"
 dependencies = [
  "cfg-if 1.0.0",
  "crossbeam-utils 0.8.3 (git+https://github.com/crossbeam-rs/crossbeam)",
@@ -356,7 +356,7 @@ dependencies = [
 [[package]]
 name = "crossbeam-skiplist"
 version = "0.0.0"
-source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
+source = "git+https://github.com/crossbeam-rs/crossbeam#e1d646005d71f41b2eef7170683aad4285d47403"
 dependencies = [
  "cfg-if 1.0.0",
  "crossbeam-epoch 0.9.3",
@@ -388,7 +388,7 @@ dependencies = [
 [[package]]
 name = "crossbeam-utils"
 version = "0.8.3"
-source = "git+https://github.com/crossbeam-rs/crossbeam#2970aae940253d350130a2462a7d0f29c8af97fa"
+source = "git+https://github.com/crossbeam-rs/crossbeam#e1d646005d71f41b2eef7170683aad4285d47403"
 dependencies = [
  "autocfg",
  "cfg-if 1.0.0",
@@ -877,9 +877,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.7.1"
+version = "1.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ea78b9742c52ac729753c1590e9adc5248ea9bdaf974597efd46c74cfaa5fb54"
+checksum = "af8b08b04175473088b46763e51ee54da5f9a164bc162f615b91bc179dbf15a3"
 
 [[package]]
 name = "ordered-float"
@@ -991,9 +991,9 @@ dependencies = [
 
 [[package]]
 name = "pin-project-lite"
-version = "0.2.5"
+version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0cf491442e4b033ed1c722cb9f0df5fcfcf4de682466c46469c36bc47dc5548a"
+checksum = "dc0e1f259c92177c30a4c9d177246edd0a3568b25756a977d0632cf8fa37e905"
 
 [[package]]
 name = "pkg-config"
@@ -1419,18 +1419,18 @@ checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
 
 [[package]]
 name = "snmalloc-rs"
-version = "0.2.24"
+version = "0.2.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ef8b05b3ebb9f8ca192bcaee085f57dec601083e90f88bcaf84c2c05c5831a0"
+checksum = "f3cc511c09c88ff9a01d0f2738069f22b3ae3a1438f9074d043e4a8e5bc65127"
 dependencies = [
  "snmalloc-sys",
 ]
 
 [[package]]
 name = "snmalloc-sys"
-version = "0.2.24"
+version = "0.2.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ae09a6102d7aa1f7263eefa5a75ea310fe352f9cc637e633b0e49d853cf8d0f"
+checksum = "ff889eba42bfadff5a6f20001f3691d05b0434f127c600344d808546efd83435"
 dependencies = [
  "cmake",
  "libc",
@@ -1483,9 +1483,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.60"
+version = "1.0.61"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c700597eca8a5a762beb35753ef6b94df201c81cca676604f547495a0d7f0081"
+checksum = "ed22b90a0e734a23a7610f4283ac9e5acfb96cbb30dfefa540d66f866f1c09c5"
 dependencies = [
  "proc-macro2",
  "quote",
