@@ -20,6 +20,8 @@ pub struct Options {
     #[structopt(long, default_value = "2000")]
     pub gc_sleep_ms: u64,
     #[structopt(long)]
+    pub skip: Option<Vec<String>>, // TODO: use just `Vec<String>`.
+    #[structopt(long)]
     pub csv: bool,
 }
 
@@ -48,7 +50,17 @@ where
     C: Collection,
     <C::Handle as CollectionHandle>::Key: Send + Debug,
 {
-    println!("-- {}", name);
+    if options
+        .skip
+        .as_ref()
+        .and_then(|s| s.iter().find(|s| s == &name))
+        .is_some()
+    {
+        println!("-- {} [skipped]", name);
+        return;
+    } else {
+        println!("-- {}", name);
+    }
 
     let threads = options
         .threads
