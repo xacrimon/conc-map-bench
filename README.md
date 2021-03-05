@@ -54,9 +54,17 @@ remove  5%
 update 10%
 ```
 
+## How to run it?
+
+```sh
+mv results results.bk
+./scripts/bench.bash
+./scripts/plot.bash
+```
+
 ## Results
 
-CPU: AMD Ryzen 7 4800HS
+CPU: AMD Ryzen 7 4800HS, 8 cores, HT enabled.
 
 See the `results/` directory.
 

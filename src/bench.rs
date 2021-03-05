@@ -21,8 +21,8 @@ pub struct Options {
     pub gc_sleep_ms: u64,
     #[structopt(long)]
     pub skip: Option<Vec<String>>, // TODO: use just `Vec<String>`.
-    #[structopt(long, default_value = "5000")]
-    pub latency_limit_ns: u64,
+    #[structopt(long)]
+    pub complete_slow: bool,
     #[structopt(long)]
     pub csv: bool,
     #[structopt(long)]
@@ -72,14 +72,20 @@ where
         .cloned()
         .unwrap_or_else(|| (1..(num_cpus::get() * 3 / 2) as u32).collect());
 
+    let mut first_throughput = None;
+
     for n in &threads {
         let m = workloads::create(options, *n).run_silently::<C>();
         handler(name, *n, &m);
 
-        if m.latency.as_nanos() > options.latency_limit_ns.into() {
-            println!("too long, skipped");
-            break;
+        if !options.complete_slow {
+            let threshold = *first_throughput.get_or_insert(m.throughput) / 5.;
+            if m.throughput <= threshold {
+                println!("too long, skipped");
+                break;
+            }
         }
+
         gc_cycle(options);
     }
     println!();

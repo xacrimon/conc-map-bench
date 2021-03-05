@@ -17,7 +17,7 @@ pub struct Options {
     width: u32,
     #[structopt(short, long, default_value = "480")]
     height: u32,
-    #[structopt(long, default_value = "2500")]
+    #[structopt(long, default_value = "2000")]
     latency_limit_ns: u64,
 }
 
@@ -78,6 +78,7 @@ fn plot_throughput(options: &Options, groups: &Groups) -> Result<(), Box<dyn Err
         .disable_y_mesh()
         .x_label_formatter(&|v| format!("{}", v))
         .y_label_formatter(&|v| format!("{:.0} Mop/s", v / 1_000_000.))
+        .x_labels(20)
         .y_desc("Throughput")
         .x_desc("Threads")
         .draw()?;
@@ -137,6 +138,7 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
         .disable_y_mesh()
         .x_label_formatter(&|v| format!("{}", v))
         .y_label_formatter(&|v| format!("{:.0} ns", v))
+        .x_labels(20)
         .y_labels(20)
         .y_desc("Latency")
         .x_desc("Threads")
