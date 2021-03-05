@@ -6,8 +6,7 @@ edition = "2018"
 publish = false
 
 [dependencies]
-#bustle = { git = "https://github.com/loyd/bustle" }
-bustle = { path = "../bustle" }
+bustle = { git = "https://github.com/loyd/bustle" }
 tracing-subscriber = "0.2.11"
 num_cpus = "1.13.0"
 fxhash = "0.2.1"
