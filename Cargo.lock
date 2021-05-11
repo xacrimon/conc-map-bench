@@ -122,8 +122,9 @@ checksum = "63396b8a4b9de3f4fdfb320ab6080762242f66a8ef174c49d8e19b674db4cdbe"
 
 [[package]]
 name = "bustle"
-version = "0.4.1"
-source = "git+https://github.com/loyd/bustle#b0a33662c2c0eb437f4f344eb542d92b77e40f2c"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c39f42e36f0ea9e67e496b5eb5742b9051a0e6059880087e5daeae7cc355905f"
 dependencies = [
  "rand 0.7.3",
  "tracing",
