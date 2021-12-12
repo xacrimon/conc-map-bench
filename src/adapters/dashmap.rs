@@ -36,18 +36,18 @@ where
     type Key = K;
 
     fn get(&mut self, key: &Self::Key) -> bool {
-        self.0.extract(key, |_, _| ()).is_some()
+        self.0.get(key).is_some()
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        !self.0.insert(*key, 0)
+        self.0.insert(*key, 0).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
-        self.0.remove(key)
+        self.0.remove(key).is_some()
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        self.0.update(key, |_, v| v + 1)
+        self.0.get_mut(key).map(|mut v| *v += 1).is_some()
     }
 }

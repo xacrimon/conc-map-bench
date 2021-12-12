@@ -29,21 +29,12 @@ pub struct Options {
     pub csv_no_headers: bool,
 }
 
-#[global_allocator]
-static ALLOC: snmalloc_rs::SnMalloc = snmalloc_rs::SnMalloc;
-
 fn gc_cycle(options: &Options) {
     sleep(Duration::from_millis(options.gc_sleep_ms));
     let mut new_guard = crossbeam_epoch::pin();
     new_guard.flush();
     for _ in 0..32 {
         new_guard.repin();
-    }
-    let mut old_guard = crossbeam_epoch_old::pin();
-    old_guard.flush();
-
-    for _ in 0..32 {
-        old_guard.repin();
     }
 }
 

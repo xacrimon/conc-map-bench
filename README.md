@@ -18,7 +18,7 @@ Implementations benchmarked
 ├── chashmap v2.2.2
 ├── contrie v0.1.4
 ├── crossbeam-skiplist v0.0.0 (https://github.com/crossbeam-rs/crossbeam#e1d64600)
-├── dashmap v4.0.0-rc6
+├── dashmap v5.0.0
 ├── evmap v10.0.2
 ├── flurry v0.3.1
 ```
@@ -64,7 +64,8 @@ mv results results.bk
 
 ## Results
 
-CPU: AMD Ryzen 7 4800HS, 8 cores, HT enabled.
+OS: MacOS Monterey
+CPU: Apple M1
 
 See the `results/` directory.
 
