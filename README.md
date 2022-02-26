@@ -75,8 +75,6 @@ See the `results/` directory.
 ![](results/ReadHeavy.fx.throughput.svg) | ![](results/ReadHeavy.fx.latency.svg)
 
 ### Exchange (fx hasher)
-**NOTE**: the `flurry` case fails because of the OOM killer.
-
 | | |
 :-------------------------:|:-------------------------:
 ![](results/Exchange.fx.throughput.svg) | ![](results/Exchange.fx.latency.svg)
@@ -92,8 +90,6 @@ See the `results/` directory.
 ![](results/ReadHeavy.std.throughput.svg) | ![](results/ReadHeavy.std.latency.svg)
 
 ### Exchange (std hasher)
-**NOTE**: the `flurry` case fails because of the OOM killer.
-
 | | |
 :-------------------------:|:-------------------------:
 ![](results/Exchange.std.throughput.svg) | ![](results/Exchange.std.latency.svg)

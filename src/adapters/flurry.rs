@@ -1,14 +1,14 @@
 use std::hash::{BuildHasher, Hash};
-use std::sync::Arc;
 
 use bustle::*;
+use seize::Collector;
 
 use super::Value;
 
-#[derive(Clone)]
-pub struct FlurryTable<K, H>(Arc<flurry::HashMap<K, Value, H>>);
+const BATCH_SIZE: usize = 2000;
 
-pub struct FlurryHandle<K: 'static, H: 'static>(flurry::HashMapRef<'static, K, Value, H>);
+#[derive(Clone)]
+pub struct FlurryTable<K: 'static, H: 'static>(&'static flurry::HashMap<K, Value, H>);
 
 impl<K, H> Collection for FlurryTable<K, H>
 where
@@ -18,16 +18,21 @@ where
     type Handle = FlurryHandle<K, H>;
 
     fn with_capacity(capacity: usize) -> Self {
-        Self(Arc::new(flurry::HashMap::with_capacity_and_hasher(
-            capacity,
-            H::default(),
+        Self(Box::leak(Box::new(
+            flurry::HashMap::with_capacity_and_hasher(capacity, H::default()).with_collector(
+                Collector::new()
+                    .epoch_frequency(None)
+                    .batch_size(BATCH_SIZE),
+            ),
         )))
     }
 
     fn pin(&self) -> Self::Handle {
-        unsafe { std::mem::transmute(self.0.pin()) }
+        FlurryHandle(self.0)
     }
 }
+
+pub struct FlurryHandle<K: 'static, H: 'static>(&'static flurry::HashMap<K, Value, H>);
 
 impl<K, H> CollectionHandle for FlurryHandle<K, H>
 where
@@ -37,18 +42,21 @@ where
     type Key = K;
 
     fn get(&mut self, key: &Self::Key) -> bool {
-        self.0.get(key).is_some()
+        self.0.pin().get(key).is_some()
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, 0).is_none()
+        self.0.pin().insert(*key, 0).is_none()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
-        self.0.remove(key).is_some()
+        self.0.pin().remove(key).is_some()
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        self.0.compute_if_present(key, |_, v| Some(v + 1)).is_some()
+        self.0
+            .pin()
+            .compute_if_present(key, |_, v| Some(v + 1))
+            .is_some()
     }
 }

@@ -12,11 +12,12 @@ num_cpus = "1.13.0"
 fxhash = "0.2.1"
 chashmap = "2.2.2"
 contrie = "0.1.4"
-flurry = "0.3.1"
+flurry = "0.4.0"
 dashmap = "5.0.0"
 crossbeam-epoch = { version = "0.9.5", package = "crossbeam-epoch" }
 parking_lot = "0.11.2"
 evmap = "10.0.2"
+seize = "0.2.1"
 crossbeam-skiplist = { git = "https://github.com/crossbeam-rs/crossbeam" }
 structopt = "0.3.25"
 json = "0.12.4"
