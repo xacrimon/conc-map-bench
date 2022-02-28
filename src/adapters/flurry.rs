@@ -1,40 +1,38 @@
-use std::hash::{BuildHasher, Hash};
-
 use bustle::*;
 use seize::Collector;
+use std::hash::{BuildHasher, Hash};
+use std::sync::Arc;
 
 use super::Value;
 
 const BATCH_SIZE: usize = 2000;
 
 #[derive(Clone)]
-pub struct FlurryTable<K: 'static, H: 'static>(&'static flurry::HashMap<K, Value, H>);
+pub struct FlurryTable<K: 'static, H: 'static>(Arc<flurry::HashMap<K, Value, H>>);
 
 impl<K, H> Collection for FlurryTable<K, H>
 where
     K: Send + Sync + From<u64> + Copy + 'static + Hash + Ord,
     H: BuildHasher + Default + Send + Sync + 'static + Clone,
 {
-    type Handle = FlurryHandle<K, H>;
+    type Handle = Self;
 
     fn with_capacity(capacity: usize) -> Self {
-        Self(Box::leak(Box::new(
+        Self(Arc::new(
             flurry::HashMap::with_capacity_and_hasher(capacity, H::default()).with_collector(
                 Collector::new()
                     .epoch_frequency(None)
                     .batch_size(BATCH_SIZE),
             ),
-        )))
+        ))
     }
 
     fn pin(&self) -> Self::Handle {
-        FlurryHandle(self.0)
+        self.clone()
     }
 }
 
-pub struct FlurryHandle<K: 'static, H: 'static>(&'static flurry::HashMap<K, Value, H>);
-
-impl<K, H> CollectionHandle for FlurryHandle<K, H>
+impl<K, H> CollectionHandle for FlurryTable<K, H>
 where
     K: Send + Sync + From<u64> + Copy + 'static + Hash + Ord,
     H: BuildHasher + Default + Send + Sync + 'static + Clone,
