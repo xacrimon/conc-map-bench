@@ -25,7 +25,7 @@ Implementations benchmarked
 
 ## Workloads
 
-### Ready Heavy
+### Read Heavy
 
 A read heavy model with few inserts, removals and updates. Models caching of data in places such as webservers and disk page caches.
 ```
@@ -69,7 +69,7 @@ CPU: Apple M1
 
 See the `results/` directory.
 
-### Ready Heavy (fx hasher)
+### Read Heavy (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
 ![](results/ReadHeavy.fx.throughput.svg) | ![](results/ReadHeavy.fx.latency.svg)
