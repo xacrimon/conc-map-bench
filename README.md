@@ -25,7 +25,7 @@ Implementations benchmarked
 
 ## Workloads
 
-### Ready Heavy
+### Read Heavy
 
 A read heavy model with few inserts, removals and updates. Models caching of data in places such as webservers and disk page caches.
 ```
