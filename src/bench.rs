@@ -1,6 +1,6 @@
 use std::collections::hash_map::RandomState;
-use std::{fmt::Debug, io, thread::sleep, time::Duration};
 use std::hash::BuildHasher;
+use std::{fmt::Debug, io, thread::sleep, time::Duration};
 
 use bustle::*;
 use fxhash::FxBuildHasher;
@@ -76,7 +76,7 @@ where
         .threads
         .as_ref()
         .cloned()
-        .unwrap_or_else(|| (1..(num_cpus::get() * 3 / 2) as u32).collect());
+        .unwrap_or_else(|| (1..=num_cpus::get() as u32).collect());
 
     let mut first_throughput = None;
 

@@ -101,8 +101,8 @@ fn plot_throughput(options: &Options, groups: &Groups) -> Result<(), Box<dyn Err
         .configure_series_labels()
         .position(SeriesLabelPosition::UpperLeft)
         .label_font((FONT, 13))
-        .background_style(&WHITE.mix(0.8))
-        .border_style(&BLACK)
+        .background_style(WHITE.mix(0.8))
+        .border_style(BLACK)
         .draw()?;
 
     Ok(())
@@ -162,8 +162,8 @@ fn plot_latency(options: &Options, groups: &Groups) -> Result<(), Box<dyn Error>
         .configure_series_labels()
         .position(SeriesLabelPosition::UpperLeft)
         .label_font((FONT, 13))
-        .background_style(&WHITE.mix(0.8))
-        .border_style(&BLACK)
+        .background_style(WHITE.mix(0.8))
+        .border_style(BLACK)
         .draw()?;
 
     Ok(())
