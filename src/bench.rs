@@ -118,6 +118,7 @@ where
     case::<DashMapTable<u64, H>>("DashMap", options, h);
     case::<FlurryTable<u64, H>>("Flurry", options, h);
     case::<EvmapTable<u64, H>>("Evmap", options, h);
+    case::<ContrieTable<u64, H>>("Contrie", options, h);
 }
 
 pub fn bench(options: &Options) {
