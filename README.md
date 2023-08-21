@@ -7,7 +7,7 @@ conc-map-bench uses the bustle benchmarking harness. This is a port of the well 
 The benchmark measures performance under varying load conditions. This is done
 because a map suitable for one workload may not be suitable for another.
 
-### Ready Heavy
+### Read Heavy
 
 A read heavy model with few inserts, removals and updates. Models caching of data in places such as webservers and disk page caches.
 ```
@@ -67,7 +67,7 @@ See the `results/` directory.
 :-------------------------:|:-------------------------:
 ![](results/RapidGrow.std.throughput.svg) | ![](results/RapidGrow.std.latency.svg)
 
-### Ready Heavy (fx hasher)
+### Read Heavy (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
 ![](results/ReadHeavy.ahash.throughput.svg) | ![](results/ReadHeavy.ahash.latency.svg)
