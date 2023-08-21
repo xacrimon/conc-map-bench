@@ -1,3 +1,4 @@
+use std::iter;
 use std::collections::hash_map::RandomState;
 use std::hash::BuildHasher;
 use std::{fmt::Debug, io, thread::sleep, time::Duration};
@@ -72,11 +73,21 @@ where
         println!("-- {}", name);
     }
 
+    let gen_threads = || {
+        let n = num_cpus::get();
+        
+        match n {
+            0..=8 => (1..=n as u32).collect(),
+            9..=16 => iter::once(1).chain((0..=n as u32).step_by(2).skip(1)).collect(),
+            _ => iter::once(1).chain((0..=n as u32).step_by(4).skip(1)).collect(),
+        }
+    };
+
     let threads = options
         .threads
         .as_ref()
         .cloned()
-        .unwrap_or_else(|| (1..=num_cpus::get() as u32).collect());
+        .unwrap_or_else(gen_threads);
 
     let mut first_throughput = None;
 
