@@ -30,7 +30,7 @@ pub struct Options {
     pub operations: f64,
     #[structopt(long)]
     pub threads: Option<Vec<u32>>,
-    #[structopt(long, parse(try_from_str = parse_hasher_kind))]
+    #[structopt(short, long, parse(try_from_str = parse_hasher_kind))]
     pub hasher: HasherKind,
     #[structopt(long, default_value = "2000")]
     pub gc_sleep_ms: u64,
