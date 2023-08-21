@@ -1,11 +1,26 @@
 use std::collections::hash_map::RandomState;
 use std::{fmt::Debug, io, thread::sleep, time::Duration};
+use std::hash::BuildHasher;
 
 use bustle::*;
 use fxhash::FxBuildHasher;
 use structopt::StructOpt;
 
 use crate::{adapters::*, record::Record, workloads};
+
+#[derive(Debug)]
+pub enum HasherKind {
+    Std,
+    Fx,
+}
+
+fn parse_hasher_kind(hasher: &str) -> Result<HasherKind, &str> {
+    match hasher {
+        "std" => Ok(HasherKind::Std),
+        "fx" => Ok(HasherKind::Fx),
+        _ => Err("invalid hasher, must be one of 'std' or 'fx'"),
+    }
+}
 
 #[derive(Debug, StructOpt)]
 pub struct Options {
@@ -15,8 +30,8 @@ pub struct Options {
     pub operations: f64,
     #[structopt(long)]
     pub threads: Option<Vec<u32>>,
-    #[structopt(long)]
-    pub use_std_hasher: bool,
+    #[structopt(long, parse(try_from_str = parse_hasher_kind))]
+    pub hasher: HasherKind,
     #[structopt(long, default_value = "2000")]
     pub gc_sleep_ms: u64,
     #[structopt(long)]
@@ -83,21 +98,26 @@ where
 }
 
 fn run(options: &Options, h: &mut Handler) {
+    case::<StdRwLockBTreeMapTable<u64>>("std:sync::RwLock<BTreeMap>", options, h);
+    case::<ParkingLotRwLockBTreeMapTable<u64>>("parking_lot::RwLock<BTreeMap>", options, h);
+    case::<CHashMapTable<u64>>("CHashMap", options, h);
     case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options, h);
-    case::<RwLockBTreeMapTable<u64>>("RwLock<BTreeMap>", options, h);
 
-    if options.use_std_hasher {
-        case::<RwLockStdHashMapTable<u64, RandomState>>("RwLock<StdHashMap>", options, h);
-        case::<DashMapTable<u64, RandomState>>("DashMap", options, h);
-        case::<FlurryTable<u64, RandomState>>("Flurry", options, h);
-        case::<EvmapTable<u64, RandomState>>("Evmap", options, h);
-        case::<CHashMapTable<u64>>("CHashMap", options, h);
-    } else {
-        case::<RwLockStdHashMapTable<u64, FxBuildHasher>>("RwLock<FxHashMap>", options, h);
-        case::<DashMapTable<u64, FxBuildHasher>>("FxDashMap", options, h);
-        case::<FlurryTable<u64, FxBuildHasher>>("FxFlurry", options, h);
-        case::<EvmapTable<u64, FxBuildHasher>>("FxEvmap", options, h);
+    match options.hasher {
+        HasherKind::Std => run_hasher_variant::<RandomState>(options, h),
+        HasherKind::Fx => run_hasher_variant::<FxBuildHasher>(options, h),
     }
+}
+
+fn run_hasher_variant<H>(options: &Options, h: &mut Handler)
+where
+    H: Default + Clone + Send + Sync + BuildHasher + 'static,
+{
+    case::<StdRwLockStdHashMapTable<u64, H>>("std::sync::RwLock<StdHashMap>", options, h);
+    case::<ParkingLotRwLockStdHashMapTable<u64, H>>("parking_lot::RwLock<StdHashMap>", options, h);
+    case::<DashMapTable<u64, H>>("DashMap", options, h);
+    case::<FlurryTable<u64, H>>("Flurry", options, h);
+    case::<EvmapTable<u64, H>>("Evmap", options, h);
 }
 
 pub fn bench(options: &Options) {
@@ -129,5 +149,5 @@ pub fn bench(options: &Options) {
         }) as Handler
     };
 
-    run(&options, &mut handler);
+    run(options, &mut handler);
 }
