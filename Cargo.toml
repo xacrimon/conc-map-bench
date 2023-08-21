@@ -9,7 +9,7 @@ publish = false
 bustle = "0.5.1"
 tracing-subscriber = "0.3.17"
 num_cpus = "1.16.0"
-fxhash = "0.2.1"
+ahash = "0.8.3"
 chashmap = "2.2.2"
 contrie = "0.1.4"
 flurry = "0.4.0"
@@ -28,4 +28,4 @@ plotters = "0.3.5"
 [profile.release]
 codegen-units = 1
 panic = "abort"
-lto = true
+lto = "thin"
