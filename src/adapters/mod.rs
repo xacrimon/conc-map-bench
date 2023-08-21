@@ -1,7 +1,8 @@
 pub use self::{
-    btreemap::RwLockBTreeMapTable, chashmap::CHashMapTable, contrie::ContrieTable,
-    crossbeam_skiplist::CrossbeamSkipMapTable, dashmap::DashMapTable, evmap::EvmapTable,
-    flurry::FlurryTable, std::RwLockStdHashMapTable,
+    btreemap::ParkingLotRwLockBTreeMapTable, btreemap::StdRwLockBTreeMapTable,
+    chashmap::CHashMapTable, contrie::ContrieTable, crossbeam_skiplist::CrossbeamSkipMapTable,
+    dashmap::DashMapTable, evmap::EvmapTable, flurry::FlurryTable,
+    std::ParkingLotRwLockStdHashMapTable, std::StdRwLockStdHashMapTable,
 };
 
 mod btreemap;
