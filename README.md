@@ -70,14 +70,14 @@ See the `results/` directory.
 ### Ready Heavy (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
-![](results/ReadHeavy.fx.throughput.svg) | ![](results/ReadHeavy.fx.latency.svg)
+![](results/ReadHeavy.ahash.throughput.svg) | ![](results/ReadHeavy.ahash.latency.svg)
 
 ### Exchange (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
-![](results/Exchange.fx.throughput.svg) | ![](results/Exchange.fx.latency.svg)
+![](results/Exchange.ahash.throughput.svg) | ![](results/Exchange.ahash.latency.svg)
 
 ### Rapid Grow (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
-![](results/RapidGrow.fx.throughput.svg) | ![](results/RapidGrow.fx.latency.svg)
+![](results/RapidGrow.ahash.throughput.svg) | ![](results/RapidGrow.ahash.latency.svg)
