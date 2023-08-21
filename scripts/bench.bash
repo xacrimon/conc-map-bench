@@ -26,11 +26,11 @@ function bench {
 }
 
 bench ReadHeavy std
-#bench Exchange std
+bench Exchange std
 #bench RapidGrow std
 
 bench ReadHeavy ahash
-#bench Exchange ahash
+bench Exchange ahash
 #bench RapidGrow ahash
 
 date

@@ -243,18 +243,13 @@ Latency
 2000 ns
 </text>
 <polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="560,36 565,36 "/>
-<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,407 133,398 239,324 346,250 452,111 559,36 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,408 133,405 239,406 346,405 452,405 559,380 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,318 133,319 239,310 346,319 452,311 559,212 "/>
-<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,416 133,414 239,406 346,398 452,394 559,384 "/>
-<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,420 133,416 239,403 346,400 452,375 559,350 "/>
-<polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="80,411 133,409 239,409 346,409 452,404 559,397 "/>
-<polyline fill="none" opacity="1" stroke="#FFFF00" stroke-width="1" points="80,398 133,379 239,332 346,243 452,120 559,36 "/>
-<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,419 133,399 239,344 346,214 452,102 559,36 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,420 133,386 239,311 346,196 452,76 559,36 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,401 133,339 239,173 346,36 452,36 559,36 "/>
-<rect x="85" y="41" width="217" height="176" opacity="0.8" fill="#FFFFFF" stroke="none"/>
-<rect x="85" y="41" width="217" height="176" opacity="1" fill="none" stroke="#000000"/>
+<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,408 133,398 239,336 346,253 452,111 559,36 "/>
+<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,408 133,407 239,407 346,405 452,402 559,393 "/>
+<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,420 133,416 239,412 346,408 452,401 559,394 "/>
+<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,421 133,419 239,410 346,398 452,378 559,342 "/>
+<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,411 133,409 239,409 346,408 452,405 559,397 "/>
+<rect x="85" y="41" width="102" height="95" opacity="0.8" fill="#FFFFFF" stroke="none"/>
+<rect x="85" y="41" width="102" height="95" opacity="1" fill="none" stroke="#000000"/>
 <text x="125" y="51" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 CHashMap
 </text>
@@ -262,37 +257,17 @@ CHashMap
 Contrie
 </text>
 <text x="125" y="84" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-CrossbeamSkipMap
-</text>
-<text x="125" y="100" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 DashMap
 </text>
-<text x="125" y="116" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
+<text x="125" y="100" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 Evmap
 </text>
-<text x="125" y="132" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
+<text x="125" y="116" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
 Flurry
-</text>
-<text x="125" y="149" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-parking_lot::RwLock&lt;BTreeMap&gt;
-</text>
-<text x="125" y="165" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-parking_lot::RwLock&lt;StdHashMap&gt;
-</text>
-<text x="125" y="181" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-std::sync::RwLock&lt;StdHashMap&gt;
-</text>
-<text x="125" y="197" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">
-std:sync::RwLock&lt;BTreeMap&gt;
 </text>
 <polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="95,56 115,56 "/>
 <polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="95,72 115,72 "/>
 <polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="95,89 115,89 "/>
 <polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="95,105 115,105 "/>
 <polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="95,121 115,121 "/>
-<polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="95,137 115,137 "/>
-<polyline fill="none" opacity="1" stroke="#FFFF00" stroke-width="1" points="95,154 115,154 "/>
-<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="95,170 115,170 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="95,186 115,186 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="95,202 115,202 "/>
 </svg>
