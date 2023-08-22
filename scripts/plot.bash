@@ -11,9 +11,9 @@ function plot {
     cat "$DATA_DIR/$1.csv" | "$BIN" plot "$DATA_DIR" "$1"
 }
 
-plot ReadHeavy.fx
-plot Exchange.fx
-plot RapidGrow.fx
 plot ReadHeavy.std
 plot Exchange.std
 plot RapidGrow.std
+plot ReadHeavy.ahash
+plot Exchange.ahash
+plot RapidGrow.ahash

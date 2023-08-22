@@ -4,7 +4,6 @@ use std::hash::BuildHasher;
 use std::{fmt::Debug, io, thread::sleep, time::Duration};
 
 use bustle::*;
-use fxhash::FxBuildHasher;
 use structopt::StructOpt;
 
 use crate::{adapters::*, record::Record, workloads};
@@ -12,14 +11,14 @@ use crate::{adapters::*, record::Record, workloads};
 #[derive(Debug)]
 pub enum HasherKind {
     Std,
-    Fx,
+    AHash,
 }
 
 fn parse_hasher_kind(hasher: &str) -> Result<HasherKind, &str> {
     match hasher {
         "std" => Ok(HasherKind::Std),
-        "fx" => Ok(HasherKind::Fx),
-        _ => Err("invalid hasher, must be one of 'std' or 'fx'"),
+        "ahash" => Ok(HasherKind::AHash),
+        _ => Err("invalid hasher, must be one of 'std' or 'ahash'"),
     }
 }
 
@@ -37,8 +36,6 @@ pub struct Options {
     pub gc_sleep_ms: u64,
     #[structopt(long)]
     pub skip: Option<Vec<String>>, // TODO: use just `Vec<String>`.
-    #[structopt(long)]
-    pub complete_slow: bool,
     #[structopt(long)]
     pub csv: bool,
     #[structopt(long)]
@@ -89,34 +86,23 @@ where
         .cloned()
         .unwrap_or_else(gen_threads);
 
-    let mut first_throughput = None;
-
     for n in &threads {
         let m = workloads::create(options, *n).run_silently::<C>();
         handler(name, *n, &m);
-
-        if !options.complete_slow {
-            let threshold = *first_throughput.get_or_insert(m.throughput) / 5.;
-            if m.throughput <= threshold {
-                println!("too long, skipped");
-                break;
-            }
-        }
-
         gc_cycle(options);
     }
     println!();
 }
 
 fn run(options: &Options, h: &mut Handler) {
-    case::<StdRwLockBTreeMapTable<u64>>("std:sync::RwLock<BTreeMap>", options, h);
-    case::<ParkingLotRwLockBTreeMapTable<u64>>("parking_lot::RwLock<BTreeMap>", options, h);
+    //case::<StdRwLockBTreeMapTable<u64>>("std:sync::RwLock<BTreeMap>", options, h);
+    //case::<ParkingLotRwLockBTreeMapTable<u64>>("parking_lot::RwLock<BTreeMap>", options, h);
     case::<CHashMapTable<u64>>("CHashMap", options, h);
-    case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options, h);
+    //case::<CrossbeamSkipMapTable<u64>>("CrossbeamSkipMap", options, h);
 
     match options.hasher {
         HasherKind::Std => run_hasher_variant::<RandomState>(options, h),
-        HasherKind::Fx => run_hasher_variant::<FxBuildHasher>(options, h),
+        HasherKind::AHash => run_hasher_variant::<ahash::RandomState>(options, h),
     }
 }
 
@@ -124,8 +110,8 @@ fn run_hasher_variant<H>(options: &Options, h: &mut Handler)
 where
     H: Default + Clone + Send + Sync + BuildHasher + 'static,
 {
-    case::<StdRwLockStdHashMapTable<u64, H>>("std::sync::RwLock<StdHashMap>", options, h);
-    case::<ParkingLotRwLockStdHashMapTable<u64, H>>("parking_lot::RwLock<StdHashMap>", options, h);
+    //case::<StdRwLockStdHashMapTable<u64, H>>("std::sync::RwLock<StdHashMap>", options, h);
+    //case::<ParkingLotRwLockStdHashMapTable<u64, H>>("parking_lot::RwLock<StdHashMap>", options, h);
     case::<DashMapTable<u64, H>>("DashMap", options, h);
     case::<FlurryTable<u64, H>>("Flurry", options, h);
     case::<EvmapTable<u64, H>>("Evmap", options, h);

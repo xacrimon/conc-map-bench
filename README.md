@@ -7,7 +7,7 @@ conc-map-bench uses the bustle benchmarking harness. This is a port of the well 
 The benchmark measures performance under varying load conditions. This is done
 because a map suitable for one workload may not be suitable for another.
 
-### Ready Heavy
+### Read Heavy
 
 A read heavy model with few inserts, removals and updates. Models caching of data in places such as webservers and disk page caches.
 ```
@@ -47,8 +47,8 @@ mv results results.bk
 
 ## Results
 
-Instance: AWS EC2 C7g.8xlarge
-OS: Linux 6.2.0-1009-aws
+Machine: Macbook Pro 14 (M1 Pro 10-Core CPU, 32GB RAM)
+OS: macOS Ventura 13.5
 
 See the `results/` directory.
 
@@ -67,17 +67,17 @@ See the `results/` directory.
 :-------------------------:|:-------------------------:
 ![](results/RapidGrow.std.throughput.svg) | ![](results/RapidGrow.std.latency.svg)
 
-### Ready Heavy (fx hasher)
+### Read Heavy (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
-![](results/ReadHeavy.fx.throughput.svg) | ![](results/ReadHeavy.fx.latency.svg)
+![](results/ReadHeavy.ahash.throughput.svg) | ![](results/ReadHeavy.ahash.latency.svg)
 
 ### Exchange (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
-![](results/Exchange.fx.throughput.svg) | ![](results/Exchange.fx.latency.svg)
+![](results/Exchange.ahash.throughput.svg) | ![](results/Exchange.ahash.latency.svg)
 
 ### Rapid Grow (fx hasher)
 | | |
 :-------------------------:|:-------------------------:
-![](results/RapidGrow.fx.throughput.svg) | ![](results/RapidGrow.fx.latency.svg)
+![](results/RapidGrow.ahash.throughput.svg) | ![](results/RapidGrow.ahash.latency.svg)

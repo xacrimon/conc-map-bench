@@ -29,8 +29,8 @@ bench ReadHeavy std
 bench Exchange std
 bench RapidGrow std
 
-bench ReadHeavy fx
-bench Exchange fx
-bench RapidGrow fx
+bench ReadHeavy ahash
+bench Exchange ahash
+bench RapidGrow ahash
 
 date
