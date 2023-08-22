@@ -47,8 +47,8 @@ mv results results.bk
 
 ## Results
 
-Machine: Macbook Pro 14 (M1 Pro 10-Core CPU, 32GB RAM)
-OS: macOS Ventura 13.5
+Machine: AWS EC2 M7i.8xlarge (Sapphire Rapids 8488C)
+OS: Ubuntu Linux 22.04
 
 See the `results/` directory.
 
