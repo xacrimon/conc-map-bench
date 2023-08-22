@@ -34,8 +34,8 @@ fn read_heavy(threads: u32) -> Workload {
     };
 
     *Workload::new(threads as usize, mix)
-        .initial_capacity_log2(21)
-        .prefill_fraction(0.8)
+        .initial_capacity_log2(25)
+        .prefill_fraction(0.75)
 }
 
 fn rapid_grow(threads: u32) -> Workload {
@@ -48,7 +48,7 @@ fn rapid_grow(threads: u32) -> Workload {
     };
 
     *Workload::new(threads as usize, mix)
-        .initial_capacity_log2(21)
+        .initial_capacity_log2(25)
         .prefill_fraction(0.0)
 }
 
@@ -62,8 +62,8 @@ fn exchange(threads: u32) -> Workload {
     };
 
     *Workload::new(threads as usize, mix)
-        .initial_capacity_log2(21)
-        .prefill_fraction(0.8)
+        .initial_capacity_log2(25)
+        .prefill_fraction(0.75)
 }
 
 pub(crate) fn create(options: &Options, threads: u32) -> Workload {
