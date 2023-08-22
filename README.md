@@ -48,6 +48,7 @@ mv results results.bk
 ## Results
 
 Machine: AWS EC2 M7i.8xlarge (Sapphire Rapids 8488C)
+
 OS: Ubuntu Linux 22.04
 
 See the `results/` directory.
