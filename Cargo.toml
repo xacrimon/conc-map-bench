@@ -13,7 +13,7 @@ ahash = "0.8.3"
 chashmap = "2.2.2"
 contrie = "0.1.4"
 flurry = "0.4.0"
-dashmap = { git = "https://github.com/arthurprs/dashmap/", branch = "small-optimizations" }
+dashmap = { version = "5.5.1", features = ["inline"] }
 crossbeam-epoch = { version = "0.9.15", package = "crossbeam-epoch" }
 parking_lot = "0.12.1"
 evmap = "10.0.2"

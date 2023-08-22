@@ -243,11 +243,11 @@ Latency
 2000 ns
 </text>
 <polyline fill="none" opacity="1" stroke="#000000" stroke-width="1" points="560,36 565,36 "/>
-<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,413 133,392 239,292 346,166 452,36 559,36 "/>
-<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,367 133,371 239,368 346,366 452,360 559,334 "/>
-<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,407 133,399 239,393 346,383 452,372 559,359 "/>
-<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,370 133,296 239,73 346,36 452,36 559,36 "/>
-<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,399 133,393 239,379 346,361 452,344 559,305 "/>
+<polyline fill="none" opacity="1" stroke="#0000FF" stroke-width="1" points="80,413 133,398 239,351 346,176 452,36 559,36 "/>
+<polyline fill="none" opacity="1" stroke="#FF0000" stroke-width="1" points="80,376 133,371 239,370 346,364 452,361 559,343 "/>
+<polyline fill="none" opacity="1" stroke="#00FF00" stroke-width="1" points="80,408 133,406 239,396 346,384 452,372 559,363 "/>
+<polyline fill="none" opacity="1" stroke="#FF00FF" stroke-width="1" points="80,358 133,287 239,36 346,36 452,36 559,36 "/>
+<polyline fill="none" opacity="1" stroke="#00FFFF" stroke-width="1" points="80,395 133,386 239,375 346,354 452,342 559,304 "/>
 <rect x="85" y="41" width="102" height="95" opacity="0.8" fill="#FFFFFF" stroke="none"/>
 <rect x="85" y="41" width="102" height="95" opacity="1" fill="none" stroke="#000000"/>
 <text x="125" y="51" dy="0.76em" text-anchor="start" font-family="Fira Code" font-size="10.483870967741936" opacity="1" fill="#000000">

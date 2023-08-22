@@ -47,8 +47,8 @@ mv results results.bk
 
 ## Results
 
-Instance: AWS EC2 C7g.8xlarge
-OS: Linux 6.2.0-1009-aws
+Machine: Macbook Pro 14 (M1 Pro 10-Core CPU, 32GB RAM)
+OS: macOS Ventura 13.5
 
 See the `results/` directory.
 
