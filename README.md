@@ -68,17 +68,17 @@ See the `results/` directory.
 :-------------------------:|:-------------------------:
 ![](results/RapidGrow.std.throughput.svg) | ![](results/RapidGrow.std.latency.svg)
 
-### Read Heavy (fx hasher)
+### Read Heavy (ahash)
 | | |
 :-------------------------:|:-------------------------:
 ![](results/ReadHeavy.ahash.throughput.svg) | ![](results/ReadHeavy.ahash.latency.svg)
 
-### Exchange (fx hasher)
+### Exchange (ahash)
 | | |
 :-------------------------:|:-------------------------:
 ![](results/Exchange.ahash.throughput.svg) | ![](results/Exchange.ahash.latency.svg)
 
-### Rapid Grow (fx hasher)
+### Rapid Grow (ahash)
 | | |
 :-------------------------:|:-------------------------:
 ![](results/RapidGrow.ahash.throughput.svg) | ![](results/RapidGrow.ahash.latency.svg)
