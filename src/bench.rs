@@ -1,6 +1,6 @@
-use std::iter;
 use std::collections::hash_map::RandomState;
 use std::hash::BuildHasher;
+use std::iter;
 use std::{fmt::Debug, io, thread::sleep, time::Duration};
 
 use bustle::*;
@@ -75,8 +75,12 @@ where
 
         match n {
             0..=8 => (1..=n as u32).collect(),
-            9..=16 => iter::once(1).chain((0..=n as u32).step_by(2).skip(1)).collect(),
-            _ => iter::once(1).chain((0..=n as u32).step_by(4).skip(1)).collect(),
+            9..=16 => iter::once(1)
+                .chain((0..=n as u32).step_by(2).skip(1))
+                .collect(),
+            _ => iter::once(1)
+                .chain((0..=n as u32).step_by(4).skip(1))
+                .collect(),
         }
     };
 
@@ -116,6 +120,7 @@ where
     case::<FlurryTable<u64, H>>("Flurry", options, h);
     case::<EvmapTable<u64, H>>("Evmap", options, h);
     case::<ContrieTable<u64, H>>("Contrie", options, h);
+    case::<SccMapTable<u64, H>>("SccMap", options, h);
 }
 
 pub fn bench(options: &Options) {
