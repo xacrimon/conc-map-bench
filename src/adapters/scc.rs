@@ -38,7 +38,7 @@ where
     type Key = K;
 
     fn get(&mut self, key: &Self::Key) -> bool {
-        self.0.get(key).is_some()
+        self.0.read(key, |_,v|*v).is_some()
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
