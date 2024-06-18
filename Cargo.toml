@@ -24,6 +24,7 @@ json = "0.12.4"
 csv = "1.2.2"
 serde = { version = "1.0.185", features = ["derive"] }
 plotters = "0.3.5"
+scc = "2.0.3"
 
 [profile.release]
 codegen-units = 1
