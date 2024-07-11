@@ -17,9 +17,6 @@ where
     type Handle = Self;
 
     fn with_capacity(capacity: usize) -> Self {
-        for _ in 0..4096 {
-            drop(scc::ebr::Guard::new());
-        }
         Self(Arc::new(scc::HashMap::with_capacity_and_hasher(
             capacity,
             H::default(),
@@ -68,9 +65,6 @@ where
     type Handle = Self;
 
     fn with_capacity(capacity: usize) -> Self {
-        for _ in 0..4096 {
-            drop(scc::ebr::Guard::new());
-        }
         Self(Arc::new(scc::HashIndex::with_capacity_and_hasher(
             capacity,
             H::default(),
