@@ -12,20 +12,20 @@ num_cpus = "1.16.0"
 ahash = "0.8.3"
 chashmap = "2.2.2"
 contrie = "0.1.4"
-flurry = "0.4.0"
-dashmap = { version = "6.0.0-rc.1", features = ["inline"] }
+flurry = "0.5.1"
+dashmap = { version = "6.0.1", features = ["inline"] }
 crossbeam-epoch = { version = "0.9.15", package = "crossbeam-epoch" }
 parking_lot = "0.12.1"
 papaya = "0.1.1"
 evmap = "10.0.2"
-seize = "0.2.5"
+seize = "0.3.3"
 crossbeam-skiplist = { git = "https://github.com/crossbeam-rs/crossbeam" }
 structopt = "0.3.26"
 json = "0.12.4"
 csv = "1.2.2"
 serde = { version = "1.0.185", features = ["derive"] }
 plotters = "0.3.5"
-scc = "2.0.3"
+scc = "2.1.2"
 
 [profile.release]
 codegen-units = 1
