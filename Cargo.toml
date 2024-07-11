@@ -16,6 +16,7 @@ flurry = "0.4.0"
 dashmap = { version = "6.0.0-rc.1", features = ["inline"] }
 crossbeam-epoch = { version = "0.9.15", package = "crossbeam-epoch" }
 parking_lot = "0.12.1"
+papaya = "0.1.1"
 evmap = "10.0.2"
 seize = "0.2.5"
 crossbeam-skiplist = { git = "https://github.com/crossbeam-rs/crossbeam" }

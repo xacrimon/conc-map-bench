@@ -118,6 +118,7 @@ where
     //case::<ParkingLotRwLockStdHashMapTable<u64, H>>("parking_lot::RwLock<StdHashMap>", options, h);
     case::<DashMapTable<u64, H>>("DashMap", options, h);
     case::<FlurryTable<u64, H>>("Flurry", options, h);
+    case::<PapayaTable<u64, H>>("Papaya", options, h);
     case::<EvmapTable<u64, H>>("Evmap", options, h);
     case::<ContrieTable<u64, H>>("Contrie", options, h);
     case::<SccMapTable<u64, H>>("SccMap", options, h);
