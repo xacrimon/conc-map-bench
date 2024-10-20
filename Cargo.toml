@@ -14,7 +14,7 @@ chashmap = "2.2.2"
 contrie = "0.1.4"
 flurry = "0.4.0"
 dashmap = { version = "6.0.0-rc.1", features = ["inline"] }
-dashmap_next = { package = "dashmap", git = "https://github.com/xacrimon/dashmap", rev = "50577647311b75000b9785f3aadf000a883bb338" }
+dashmap_next = { package = "dashmap", git = "https://github.com/xacrimon/dashmap", rev = "5deeb80524202a4604eeed091ceaa2df3d8821ce" }
 crossbeam-epoch = { version = "0.9.15", package = "crossbeam-epoch" }
 parking_lot = "0.12.1"
 evmap = "10.0.2"
