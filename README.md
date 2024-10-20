@@ -68,17 +68,17 @@ See the `results/` directory.
 :-------------------------:|:-------------------------:
 ![](results/RapidGrow.std.throughput.svg) | ![](results/RapidGrow.std.latency.svg)
 
-### Read Heavy (ahash)
+### Read Heavy (foldhash)
 | | |
 :-------------------------:|:-------------------------:
-![](results/ReadHeavy.ahash.throughput.svg) | ![](results/ReadHeavy.ahash.latency.svg)
+![](results/ReadHeavy.foldhash.throughput.svg) | ![](results/ReadHeavy.foldhash.latency.svg)
 
-### Exchange (ahash)
+### Exchange (foldhash)
 | | |
 :-------------------------:|:-------------------------:
-![](results/Exchange.ahash.throughput.svg) | ![](results/Exchange.ahash.latency.svg)
+![](results/Exchange.foldhash.throughput.svg) | ![](results/Exchange.foldhash.latency.svg)
 
-### Rapid Grow (ahash)
+### Rapid Grow (foldhash)
 | | |
 :-------------------------:|:-------------------------:
-![](results/RapidGrow.ahash.throughput.svg) | ![](results/RapidGrow.ahash.latency.svg)
+![](results/RapidGrow.foldhash.throughput.svg) | ![](results/RapidGrow.foldhash.latency.svg)
