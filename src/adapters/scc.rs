@@ -36,19 +36,19 @@ where
     type Key = K;
 
     fn get(&mut self, key: &Self::Key) -> bool {
-        self.0.read(key, |_, _| ()).is_some()
+        self.0.read_sync(key, |_, _| ()).is_some()
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, 0).is_ok()
+        self.0.insert_sync(*key, 0).is_ok()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
-        self.0.remove(key).is_some()
+        self.0.remove_sync(key).is_some()
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        self.0.update(key, |_, v| *v += 1).is_some()
+        self.0.update_sync(key, |_, v| *v += 1).is_some()
     }
 }
 
@@ -88,18 +88,17 @@ where
     }
 
     fn insert(&mut self, key: &Self::Key) -> bool {
-        self.0.insert(*key, 0).is_ok()
+        self.0.insert_sync(*key, 0).is_ok()
     }
 
     fn remove(&mut self, key: &Self::Key) -> bool {
-        self.0.remove(key)
+        self.0.remove_sync(key)
     }
 
     fn update(&mut self, key: &Self::Key) -> bool {
-        if let scc::hash_index::Entry::Occupied(mut o) = self.0.entry(*key) {
+        if let scc::hash_index::Entry::Occupied(mut o) = self.0.entry_sync(*key) {
             unsafe {
-                let val = o.get_mut();
-                *val += 1;
+                *o.get_mut() += 1;
             }
             true
         } else {
