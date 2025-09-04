@@ -121,6 +121,7 @@ where
     case::<EvmapTable<u64, H>>("Evmap", options, h);
     case::<ContrieTable<u64, H>>("Contrie", options, h);
     case::<SccMapTable<u64, H>>("SccMap", options, h);
+    case::<SccMapTable<u64, H>>("SccIndex", options, h);
 }
 
 pub fn bench(options: &Options) {
