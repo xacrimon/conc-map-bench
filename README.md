@@ -37,12 +37,20 @@ remove  5%
 update 10%
 ```
 
+### Custom
+
+Define your own workload pattern with flexible operation percentages.
+
 ## How to run it?
 
 ```sh
 mv results results.bk
-./scripts/bench.bash
-./scripts/plot.bash
+
+./scripts/bench.bash # benchmark all
+# ./scripts/bench.bash -w Custom -h std --read 60 --insert 20 --remove 20 --skip CHashMap
+
+./scripts/plot.bash # plot all
+# ./scripts/plot.bash -f ReadHeavy.std,Custom.std
 ```
 
 ## Results
