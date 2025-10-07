@@ -40,6 +40,22 @@ pub struct Options {
     pub csv: bool,
     #[structopt(long)]
     pub csv_no_headers: bool,
+
+    // Custom workload parameters
+    #[structopt(long, help = "Read percentage (0-100)")]
+    pub read: Option<u8>,
+    #[structopt(long, help = "Insert percentage (0-100)")]
+    pub insert: Option<u8>,
+    #[structopt(long, help = "Remove percentage (0-100)")]
+    pub remove: Option<u8>,
+    #[structopt(long, help = "Update percentage (0-100)")]
+    pub update: Option<u8>,
+    #[structopt(long, help = "Upsert percentage (0-100)")]
+    pub upsert: Option<u8>,
+    #[structopt(long, help = "Initial capacity log2", default_value = "25")]
+    pub capacity_log2: u8,
+    #[structopt(long, help = "Prefill fraction (0.0-1.0)", default_value = "0.75")]
+    pub prefill: f64,
 }
 
 fn gc_cycle(options: &Options) {
@@ -49,6 +65,27 @@ fn gc_cycle(options: &Options) {
     for _ in 0..32 {
         new_guard.repin();
     }
+}
+
+fn validate_workload(options: &Options) -> Result<(), &str> {
+    if matches!(options.workload, workloads::WorkloadKind::Custom) {
+        let read = options.read.unwrap_or(0);
+        let insert = options.insert.unwrap_or(0);
+        let remove = options.remove.unwrap_or(0);
+        let update = options.update.unwrap_or(0);
+        let upsert = options.upsert.unwrap_or(0);
+        let prefill = options.prefill;
+
+        let total = read + insert + remove + update + upsert;
+
+        if total != 100 {
+            return Err("operations percentages must sum to 100");
+        }
+        if prefill < 0.0 || prefill > 1.0 {
+            return Err("prefill must be between 0.0 and 1.0");
+        }
+    }
+    Ok(())
 }
 
 type Handler = Box<dyn FnMut(&str, u32, &Measurement)>;
@@ -124,6 +161,12 @@ where
 }
 
 pub fn bench(options: &Options) {
+    // Process custom workload options, if parameters are provided
+    if let Err(e) = validate_workload(options) {
+        eprintln!("Error validating custom workload: {}", e);
+        std::process::exit(1);
+    }
+
     println!("== {:?}", options.workload);
 
     let mut handler = if options.csv {
